@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup-login.css') }}" >
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4e16efa13b.js" crossorigin="anonymous"></script>
+    <link  rel="shortcut icon" type="image/x-icon" href="/images/devdoot-logo.png">
+    <link href="images/devdoot-logo.png" rel="apple-touch-icon">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2.2.2/dist/flickity.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>Devdoot Foundation</title>
+</head>
+<body>
+          
+
+            
+            <div class="container">
+              {% include 'includes/_messages.html' %}
+                {% block body %}{% endblock %}
+            </div>
+
+                
+      
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+          <script src="https://unpkg.com/flickity@2.2.2/dist/flickity.pkgd.min.js"></script>
+          <script src="main.js"></script>
+          <script>      
+         
+           
+            $('.dropdown-closer').click(event => {
+              event.preventDefault();
+            })
+
+
+            const labels = document.querySelectorAll('.label')
+const formInputs = document.querySelectorAll('form div input')
+
+
+formInputs.forEach(formInput => {
+
+  formInput.addEventListener('mouseover',() => {
+    formInput.previousElementSibling.classList.add('label-up')
+  })
+
+  formInput.addEventListener('mouseleave',() => {
+    if(formInput.value !== ''){
+      formInput.previousElementSibling.classList.add('label-up')
+      return
+    }
+    if(document.activeElement === formInput){
+      formInput.previousElementSibling.classList.add('label-up')
+      return
+    }
+    formInput.previousElementSibling.classList.remove('label-up')
+  })
+  
+   formInput.addEventListener('blur',() => {
+     if(formInput.value !== ''){
+       formInput.previousElementSibling.classList.add('label-up')
+       return
+     }
+    formInput.previousElementSibling.classList.remove('label-up')
+  })
+  
+})
+
+
+
+          </script>
+
+          
+      </body>
+      </html>
+      

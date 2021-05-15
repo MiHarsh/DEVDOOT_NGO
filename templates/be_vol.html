@@ -1,0 +1,50 @@
+{% extends 'signup-login-layout.html' %}
+
+{% block body %}
+
+{% from "includes/_formhelpers.html" import render_field %}
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<div class="container">
+  <h1>Become Volunteer</h1>
+  <form action="/become_volunteer" method="POST" enctype="multipart/form-data">
+
+    <div>
+      <p class="label">Email</p>
+      <input type="email" name="email">
+    </div>
+
+    <div>
+      <p class="label">City</p>
+      <input type="text" name="city">
+    </div>
+
+    <div>
+      <p class="label">Profession</p>
+      <input type="text" name="Profession">
+    </div>
+
+    <div>
+      <p class="label">Public your MobileNumber (YES\NO) ?</p>
+      <input type="text" name="mob_per">
+    </div>
+
+    <div>
+      <p class="label">Public your Email (YES/NO) ?</p>
+      <input type="text" name="email_per">
+    </div>
+
+    <div clas="btn">
+      <button type="submit">Submit</button>
+    </div>
+
+
+  </form>
+</div>
+
+
+
+
+{% endblock %}

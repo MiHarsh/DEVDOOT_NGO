@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    paddiang: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  body{
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .container{
+    width: 500px;
+    margin: auto;
+    margin-top: 40px;
+  }
+  
+  form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 30px;
+  }
+  
+  h1{
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  
+  form div{
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+  }
+  
+  .label, form div input{
+    font-size: 1.3rem;
+  }
+  
+  .label {
+    transform: translateY(100%) scale(0.9) translateX(-20px);
+    transition: 0.2s linear;
+    position: relative;
+    opacity: 0.7;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 1rem;
+  }
+  
+  .label-up{
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+  }
+  
+  .leave-down{
+    transform: translateY(0);
+  }
+  
+  
+  form div input{
+    height: 2rem;
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #000;
+    position: relative;
+    background-color: transparent;
+    margin-bottom: 25px;
+    outline: none;
+    font-size: 1.3rem;
+    padding: 2px;
+    color: rgba(0,0,0,0.7)
+  }
+  
+  form div button{
+    margin: 20px 20%;
+    font-size: 1rem;
+    padding: 8px 0;
+    border: none;
+    transition: 0.2s ease-in;
+  }
+  
+  form div button:hover{
+    background-color: rgb(197, 197, 197);
+  }
+  
+  form div small{
+    font-size: 1rem;
+    border: none;
+    text-align: center;
+    color: rgb(35, 168, 242);
+  }
+  
+  

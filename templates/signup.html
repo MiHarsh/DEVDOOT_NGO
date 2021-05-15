@@ -1,0 +1,44 @@
+{% extends 'signup-login-layout.html' %}
+
+{% block body %}
+
+
+{% from "includes/_formhelpers.html" import render_field %}
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<div class="container">
+  <h1>Sign Up</h1>
+  <form tabindex="502" method="POST" action="/signup">
+    <div>
+      
+      {{render_field(form.mob_num, class_="form-control")}}
+    </div>
+    <div>
+      
+      {{render_field(form.name, class_="form-control")}}
+    </div>
+    <div>
+      
+      {{render_field(form.password, class_="form-control")}}
+    </div>
+    <div>
+     
+      {{render_field(form.confirmed, class_="form-control")}}
+    </div>
+    <div>
+        <button type="submit">SignUp</button>
+    </div>
+    
+  </form>
+  <div style="text-align: center;">
+    All ready have account ? <a href="/login">Login</a>
+  </div>
+</div>
+
+
+
+
+
+{% endblock %}

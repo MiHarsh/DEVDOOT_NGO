@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" >
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4e16efa13b.js" crossorigin="anonymous"></script>
+    <link  rel="shortcut icon" type="image/x-icon" href="/images/devdoot-logo.png">
+    <link href="images/devdoot-logo.png" rel="apple-touch-icon">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2.2.2/dist/flickity.min.css">
+    <title>Devdoot Foundation</title>
+</head>
+<body>
+          <div class="navbar-sticky mobile-only text-right py-2 px-4">
+            <a class="menu-hamburger-mobile" data-toggle="collapse" href="#collapsibleNavbar" role="button" aria-expanded="false" aria-controls="collapsibleNavbar">
+              <i class="fas fa-navicon">
+              </i>
+            </a>
+          </div>
+          <div class="container-fluid header py-3 px-md-5 align-items-center">
+            <div class="col flex-grow-0 mobile-only text-right">
+              <a class="menu-hamburger-mobile" data-toggle="collapse" href="#collapsibleNavbar" role="button" aria-expanded="false" aria-controls="collapsibleNavbar">
+                <i class="fas fa-navicon">
+                </i>
+              </a>
+            </div>
+            <div class="row mx-0 px-md-4 align-items-center flex-grow-md-1 flex-grow-0">
+              <div class="header-logo col-12 col-md-auto pl-0 pr-0 pr-md-4 mb-3 mb-md-0">
+                <a href="/" class="header-logo-image-wrapper"><img src= "devdoot-logo.png"  alt="Devdoot-logo" id="header-logo-image" ></a>
+              </div>
+              <div class="header-title-wrapper col-12 col-md text-center text-md-left px-4 pl-md-0 pr-md-2 mb-4 mb-md-0">
+                <h1 class="header-title mb-2 mb-md-0">Vanar Sena</h1>
+                <h1 class="header-sub-title"><i>Saving Life Saving Humanity </i>
+                
+              </div>
+              <div class="extra-links-wrapper col-md-auto col-12 px-0 text-center text-md-left">
+                <a href="" class="fas fa-home extra-link"></a>
+                <a href="" class="fas fa-phone-alt extra-link"></a>
+                <a href="" class="fas fa-address-card extra-link"></a>
+              </div>
+            </div>
+            <div class="col flex-grow-0 mobile-only scroll-down-mobile text-center">
+              <i class="fas fa-chevron-down"></i>
+            </div>
+          </div>
+
+            {% include 'includes/nav.html' %}
+            <div class="container">
+              {% include 'includes/_messages.html' %}
+                {% block body %}{% endblock %}
+            </div>
+
+                
+      
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
+          <script src="https://unpkg.com/flickity@2.2.2/dist/flickity.pkgd.min.js"></script>
+          <script src="main.js"></script>
+          <script>      
+         
+           
+            $('.dropdown-closer').click(event => {
+              event.preventDefault();
+            })
+          </script>
+      </body>
+      </html>
+      

@@ -1,0 +1,242 @@
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #e6e6e6 !important;
+  font-family: 'Lora', serif;
+  font-size: 14px;
+  font-family: 'Cairo', sans-serif;
+  max-width: 100vw;
+  scroll-behavior: smooth;
+}
+
+/*Navbar*/
+
+.navbar {
+  background-color: #0d7ee7;
+  box-shadow: 0 0px 3px #0d7ee7;
+}
+.nav-item {
+  /* border: 1px solid black; */
+  padding: 0 10px;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+}
+.nav-item a:hover {
+  background-color: lightgray;
+  border-radius: 10px;
+  color: #0d4479 !important;
+  transition-duration: 700ms;
+}
+.nav-item a {
+  color: whitesmoke;
+}
+.navbar-dark .nav-item a:hover {
+  background-color: #0d7ee7;
+  color: white;
+}
+.nav-link {
+  line-height: normal;
+}
+.navbar-toggler-icon .fa-navicon {
+  color: whitesmoke;
+  font-size: 28px;
+}
+.dropdown-menu {
+  border: 0;
+  background-color: #0d7ee7;
+  position: absolute;
+  margin: 0;
+}
+.dropdown-item {
+  padding: 0.3rem 0;
+  text-align: center;
+}
+@media (max-width: 767px) {
+  .nav-item {
+    position: static;
+  }
+  .dropdown > a:hover,
+  .dropdown-menu > .dropdown-closer:hover {
+    color: whitesmoke;
+    background-color: transparent;
+  }
+  .navbar-nav .dropdown-menu {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(50vw, -50%);
+    transition: transform 0.5s;
+    width: 100vw;
+    padding: 0 25%;
+    max-height: 80vh;
+    overflow-y: scroll;
+  }
+  .dropdown-menu.show {
+    transform: translate(-50%, -50%);
+  }
+  .dropdown-closer {
+    font-weight: bold;
+  }
+  .dropdown-item {
+    font-size: 1.1rem;
+  }
+}
+@media (min-width: 767.98px) {
+  .collapse.navbar {
+    display: block;
+  }
+  .nav-item.dropdown:hover .dropdown-menu,
+  .dropdown-menu.show {
+    display: flex;
+    flex-flow: row wrap;
+    width: 400px;
+  }
+  .dropdown-item {
+    width: 200px;
+  }
+}
+@media (min-width: 1217px) {
+  .nav-item.dropdown:hover .dropdown-menu,
+  .dropdown-menu.show {
+    width: 600px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh !important;
+    overflow: hidden;
+    transition: width 0.35s ease;
+    padding: 0;
+    display: flex !important;
+  }
+  .navbar > .container-fluid {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+  }
+  .navbar.collapsing,
+  .navbar.show {
+    width: 100vw;
+  }
+  .navbar-cross {
+    color: white;
+    font-size: 24px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .navbar-collapse {
+    width: 100%;
+    font-size: 1.2rem;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 15px;
+}
+
+.header {
+  /* border: 1px solid blueviolet; */
+  background-color: white;
+  display: flex;
+}
+.header-logo {
+  /* border: 1px solid blue; */
+  /* display: flex;
+justify-content: center;
+align-items: center; */
+}
+#header-logo-image {
+  width: 100%;
+  max-width: 80px;
+}
+.header-title-wrapper {
+  padding-left: 0;
+}
+.header-title,
+.header-sub-title {
+  color: #0d7ee7;
+  padding: 0;
+  margin: 0;
+}
+.header-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+}
+.header-sub-title {
+  font-size: 1rem;
+  font-weight: 600;
+}
+.extra-link {
+  color: #0d7ee7;
+  text-decoration: none;
+  font-size: 1.4rem;
+  margin: 0.3em;
+}
+
+.mobile-only {
+  display: none;
+}
+@media (max-width: 767.98px) {
+  .mobile-only {
+    display: block;
+  }
+  .header {
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .header-logo-image-wrapper {
+    display: block;
+    width: 50%;
+    max-width: 200px;
+    margin: auto;
+  }
+  #header-logo-image {
+    max-width: unset;
+    width: 100%;
+  }
+  .extra-link {
+    font-size: 1.5rem;
+  }
+  .menu-hamburger-mobile,
+  .scroll-down-mobile {
+    font-size: 24px;
+    color: #0d7ee7;
+  }
+  .menu-hamburger-mobile {
+    color: #0f7fe9;
+  }
+
+  .navbar-sticky {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: #0d7ee7;
+    z-index: 1019;
+    transform: translateY(-120%);
+    transition: transform 0.6s;
+  }
+  .navbar-sticky.visible {
+    transform: translateY(0);
+  }
+  .navbar-sticky > .menu-hamburger-mobile {
+    color: white;
+  }
+}
