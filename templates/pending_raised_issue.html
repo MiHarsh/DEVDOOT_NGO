@@ -7,6 +7,20 @@
          
 <br>
 
+<form id="pending_issue_search">
+    <div class="form-group" style="display: flex; justify-content: space-around;">
+      <div>
+        <label class="form-label">Name: </label>
+        <input type="text" class="form-control" id="filterInput" placeholder="Name" onkeyup="searchinfo()">
+      </div>  
+      <div>
+        <label class="form-label">City: </label>
+        <input type="text" class="form-control" id="filterInput1" placeholder="City" onkeyup="searchinfo()">
+      </div>
+    </div>
+</form>
+<br>
+
 <div class="table-responsive"> 
 
 <table class="table" style="text-align: center;">
@@ -20,7 +34,7 @@
             <th scope="col">Issue</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="requTable">
         {% for user in users %}
             {% for request in users[user]['raised_requests']%}
                 <tr>
@@ -40,6 +54,39 @@
 
   
 </div>
+
+<script>
+    const searchinfo = () => {
+        let filter=document.getElementById('filterInput').value.toUpperCase();
+        let filter1=document.getElementById('filterInput1').value.toUpperCase();
+        console.log(filter)
+        console.log(filter1)
+
+        let t_body = document.getElementById('requTable');
+        let Prequest_info=t_body.getElementsByTagName('tr');
+        for (var i=0 ; i<Prequest_info.length ; i++)
+        {
+
+            var t_n=Prequest_info[i].getElementsByTagName('td')[0];
+            var t_name=(t_n.textContent||t_n.innerHTML);
+
+            var t_s=Prequest_info[i].getElementsByTagName('td')[1];
+            var t_city=(t_s.textContent||t_s.innerHTML);
+
+            
+            if (t_city.toLocaleUpperCase().indexOf(filter1) > -1) {
+                if (t_name.toLocaleUpperCase().indexOf(filter) > -1) {
+                    Prequest_info[i].style.display = ''
+                } else {
+                    Prequest_info[i].style.display = 'none'
+                }
+            } else {
+                Prequest_info[i].style.display = 'none'
+            }
+            
+        }
+    }
+</script>
 
 
 {% endblock %}

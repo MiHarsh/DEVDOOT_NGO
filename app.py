@@ -101,7 +101,7 @@ def is_logged_in(f):
 ###################################################################################################
 
 
-# Check if the currentuser is admin
+# Check if the user is admin
 def is_admin(f):
     @wraps(f)
     def wrap(*args, **kwargs):
