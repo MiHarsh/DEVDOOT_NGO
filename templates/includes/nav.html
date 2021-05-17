@@ -21,6 +21,22 @@
                     <a class="nav-link" href="">Contact Us</a>
                   </li>
 
+                  <li class="nav-item">
+                    <a class="nav-link" href="/volunteer_list">Volunteer</a>
+                  </li>
+
+                  {% if this_User %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="/my_raised_request">My Issue</a>
+                    </li>
+                  {% endif %}
+
+                  {% if this_User_num == admin_number  %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="/pending_raised_issue">Pending Issue</a>
+                  </li>
+                  {% endif %}
+
                   {% if this_User %}
                   
                   <li class="nav-item">

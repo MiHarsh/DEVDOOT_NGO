@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+<div class="container" style="background-color:white; padding: 2%; margin-top: 1%; margin-bottom: 2%;">
+         
+<br>
+
+<div class="table-responsive"> 
+
+<table class="table" style="text-align: center;">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">City</th>
+            <th scope="col">Mobile Number</th>
+            <th class="col">Date</th>
+            <th scope="col">Issue Subject</th>
+            <th scope="col">Issue</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+            {% for request in users[user]['raised_requests']%}
+                <tr>
+                    <td>{{ users[user]['name'] }}</td>
+                    <td>{{ users[user]['raised_requests'][request]['city'] }}</td>
+                    <td>{{ users[user]['mob_num'] }}</td>
+                    <td>{{ users[user]['raised_requests'][request]['date'] }}</td>
+                    <td>{{ users[user]['raised_requests'][request]['issue_subject'] }}</td>
+                    <td>{{ users[user]['raised_requests'][request]['issue'] }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
+  
+</div>
+
+
+{% endblock %}

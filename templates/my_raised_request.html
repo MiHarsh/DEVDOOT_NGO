@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+<div class="container" style="background-color:white; padding: 2%; margin-top: 1%; margin-bottom: 2%;">
+         
+    <br>
+      
+<div class="table-responsive"> 
+
+<table class="table" style="text-align: center;">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Issue Subject</th>
+            <th class="col">Date</th>
+            <th scope="col">Issue</th>
+            <th scope="col">Solved</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for issue in issues %}
+            <tr>
+                <td>{{ issues[issue]['issue_subject'] }}</td>
+                <td>{{ issues[issue]['date'] }}</td>
+                <td>{{ issues[issue]['issue'] }}</td>
+                <td>
+                    <form action="/delete_raised_request/{{ issue }}" method="POST" enctype="multipart/form-data">
+                        <button class="btn btn-danger">Delet</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
+  
+    </div>
+
+
+{% endblock %}

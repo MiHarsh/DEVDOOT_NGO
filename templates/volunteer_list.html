@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+<div class="container" style="background-color:white; padding: 2%; margin-top: 1%; margin-bottom: 2%;">
+         
+    <br>
+<div class="table-responsive">  
+
+<table class="table table-responsibe" style="text-align: center;">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">City</th>
+            <th scope="col">Proffesion</th>
+            <th scope="col">Mobile Number</th>
+            <th scope="col">Email</th>
+            {%  if admin_number==this_User_num %}
+            <th scope="col">Remove</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for vol in v_info %}
+        <tr>
+            <td>{{v_info[vol]['name']}}</td>
+            <td>{{v_info[vol]['city']}}</td>
+            <td>{{v_info[vol]['Profession']}}</td>
+            
+            {% if  session['is_admin'] %}
+                <td>{{v_info[vol]['mob_num']}}</td>
+                <td>{{v_info[vol]['email']}}</td>
+            {% else %}
+                {% if v_info[vol]['mob_per'] == "1" and v_info[vol]['email_per'] == "1" %}
+                    <td>{{v_info[vol]['mob_num']}}</td>
+                    <td>{{v_info[vol]['email']}}</td>
+                {% elif v_info[vol]['email_per'] == "1" %}
+                    <td>-</td>
+                    <td>{{v_info[vol]['email']}}</td>
+                {% else %}
+                    <td>{{v_info[vol]['mob_num']}}</td>
+                    <td>-</td>
+                {% endif %} 
+            {% endif %}
+
+            {%  if admin_number==this_User_num %}
+                <td>
+                    <form action="/remove_volunteer/{{ vol }}" method="POST" enctype="multipart/form-data">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            {% endif %}
+
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+
+  
+ </div>
+
+{% endblock %}
