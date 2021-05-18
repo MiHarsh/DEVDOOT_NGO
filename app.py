@@ -2,12 +2,17 @@ from flask import Flask, render_template, request, flash, redirect, url_for, ses
 from functools import wraps
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators
 from flask_mail import Mail, Message
-from random import randint
+from random import randint , randrange
 import requests
 import time
 import datetime
 import pyrebase
 import hashlib
+import json
+
+from facebook import GraphAPI
+import tweepy
+
 ##import os
 ##from PIL import Image
 ##import numpy as np
@@ -27,6 +32,48 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 db = firebase.database() 
+
+################################################################  Send Tweet and FB Post
+
+def read_creds(filename):
+    with open(filename) as f:
+        credentials = json.load(f)
+    return credentials
+ 
+credentials = read_creds('credentials.json')
+
+graph = GraphAPI(access_token=credentials['fb']['access_token'])
+
+try:
+    oauth = tweepy.OAuthHandler(credentials['twitter']['consumer_key'],credentials['twitter']['consumer_secret_key'])
+    oauth.set_access_token(credentials['twitter']['access_token'],credentials['twitter']['access_token_secret'])
+except Exception as e:
+    oauth = None
+
+twitter_api = tweepy.API(oauth)
+
+def post_fb(message):
+    '''
+    There can be multiple groups(pages where we can send)
+    '''
+    groups = ['101415295474775']
+
+    try: 
+        for group in groups:
+            graph.put_object(group,'feed', message=message)
+        return True
+    except:
+        return False 
+
+def post_tweet(message):
+    try:
+        twitter_api.update_status(message)
+        return True
+    except:
+        return False
+
+
+################################################################
 
 app = Flask(__name__)
 
@@ -116,18 +163,19 @@ def is_admin(f):
 
 ################################################################  User Signup
 
+
 @app.route('/signup' , methods=['GET', 'POST'])
 def signup():
     form =signupForm(request.form)
     if request.method == 'POST'and form.validate():
         mob_num = form.mob_num.data
-        print(mob_num)
 
         users = db.child("Users").get().val()
         for x in users:
             if users[x]['mob_num'] == mob_num:
                 flash("An account with this number already exists", "danger")
                 return redirect(url_for('signup'))
+        
         
 
         name = form.name.data
@@ -140,14 +188,76 @@ def signup():
             "password": password,
             "raised_requests":""
         }
-        db.child("Users").push(data)
 
-        flash('you are now registered and can log in', 'success')
+        session["verify_user_details"] = data
 
-        return redirect(url_for("login"))
+        number = data["mob_num"]
+        status,otp_temp,time_otp = getOTPApi(number)
+        session['current_otp']   = otp_temp
+        session['current_time']  = time_otp
+
+        if status:
+            return redirect(url_for("verifyOTP"))
+
+        flash('Something went wrong', 'danger')
+        return redirect(url_for("signup"))
+
     else:
         return render_template("signup.html" ,form = form)
 
+
+################################################################  Verify OTP
+
+def getOTPApi(number):
+    otp_temp = randrange(100000,999999)
+    URL = f"http://2factor.in/API/V1/3a17f455-b7ae-11eb-8089-0200cd936042/SMS/{number}/{otp_temp}" 
+    r = requests.get(url = URL).json() 
+    t0 = time.time()
+    if r["Status"] == "Success":
+        return (True,otp_temp,t0)
+    else:
+        return (False,otp_temp,t0)
+
+
+@app.route('/verifyOTP',methods=['GET','POST'])
+def verifyOTP():
+    
+    if request.method == 'POST':
+
+        r_otp = request.form['otp']
+        t1 = time.time()
+
+        if((t1 - session.get('current_time')) < 150):
+            if( session.get('current_otp') == int(r_otp)):
+                data = session.get("verify_user_details")
+                db.child("Users").push(data)
+                session["current_time"] = -1
+                flash('you are now registered and can log in', 'success')
+                return redirect(url_for("login"))
+            else:
+                flash('wrong otp', 'danger')
+                return render_template("verify.html")
+
+        flash('otp was expired, please resend OTP', 'danger')
+        return redirect(url_for("verifyOTP"))
+    
+    return render_template("verify.html")
+
+################################################################  Resend OTP
+
+@app.route('/resendOTP')
+def resendOTP():
+    data = session.get("verify_user_details")
+    number = data["mob_num"]
+    status,otp_temp,time_otp = getOTPApi(number)
+    session['current_otp']   = otp_temp
+    session['current_time']  = time_otp
+
+    if status:
+        return redirect(url_for("verifyOTP"))
+
+    flash('Something went wrong', 'danger')
+    return redirect(url_for("signup"))
 
 
 
@@ -193,6 +303,8 @@ def login():
 
     else:
         return render_template("login.html" ,form = form)
+
+
 
 
 #################################################################################################
@@ -243,6 +355,7 @@ def become_volunteer():
 
 ################################################################################################# Rasing Request
 
+
 @app.route('/raise_request', methods=['GET','POST'])
 @is_logged_in
 def raise_request():
@@ -266,11 +379,20 @@ def raise_request():
         msg.body = str(issue +'\r\n \r\n'+"By :- "+str(session['username'])+" \r\n ("+str(session['mob_num'])+")\r\n City :- "+str(city) )
         mail.send(msg)
 
+
+        message = f"Subject : {issue_subject}\n\n Issue : {issue}\n\n City : {city}\n Contact : {session['mob_num']}"
+
+        flag1 = post_fb(message)
+        flag2 = post_tweet(message)
+
         db.child("Users/"+session['user_id']+"/raised_requests").push(data)
 
-        flash('you Issue has been raised', 'success')
-
-        return redirect(url_for("index"))
+        if(flag1 & flag2):
+            flash('you Issue has been raised', 'success')
+            return redirect(url_for("index"))
+        
+        flash('Something went wrong', 'danger')
+        return render_template("raise_request.html")
 
     return render_template("raise_request.html")
 
