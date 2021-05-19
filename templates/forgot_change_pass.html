@@ -8,27 +8,18 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 <div class="container">
-  <h1>Login</h1>
-  <form tabindex="502" method="POST" action="/login">
-    <div>
-      
-      {{render_field(form.mob_num, class_="form-control")}}
-    </div>
+  <h1>Enter New Password</h1>
+  <form tabindex="502" method="POST" action="/update_password">
+
     <div>
       {{render_field(form.password, class_="form-control")}}
     </div>
     <div>
-        <button type="submit">Login</button>
+        <button type="submit">Update Password</button>
     </div>
     
   </form>
   
-  <div style="text-align: center;">
-    Dont't have account ? <a href="/signup">Signup</a>
-  </div>
-  <div style="text-align: center;">
-    <a href="/forgot">Forgot password</a>
-  </div>
 </div>
 
 
