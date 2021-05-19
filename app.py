@@ -115,6 +115,20 @@ class loginForm(Form):
         validators.DataRequired()
     ])
 
+class forgotmob(Form):
+    mob_num = StringField('Mobile Number', [
+        validators.DataRequired(),
+        validators.Length(min=10, max=10)
+    ])
+
+class forgotpass(Form):
+    password = PasswordField('Password', [
+        validators.DataRequired()
+    ])
+
+
+
+
 ############################################################# index
 
 @app.route('/')
@@ -190,8 +204,11 @@ def signup():
         }
 
         session["verify_user_details"] = data
-
+        
         number = data["mob_num"]
+        session["mob_num"] = number
+        session["is_login_signup"] = True  # To reuse the resend endpoint
+
         status,otp_temp,time_otp = getOTPApi(number)
         session['current_otp']   = otp_temp
         session['current_time']  = time_otp
@@ -247,17 +264,21 @@ def verifyOTP():
 
 @app.route('/resendOTP')
 def resendOTP():
-    data = session.get("verify_user_details")
-    number = data["mob_num"]
+
+    number = session["mob_num"]
     status,otp_temp,time_otp = getOTPApi(number)
     session['current_otp']   = otp_temp
     session['current_time']  = time_otp
 
     if status:
-        return redirect(url_for("verifyOTP"))
+        if session["is_login_signup"]:
+            return redirect(url_for("verifyOTP"))
+        return redirect(url_for("forgot_verify_otp"))
 
     flash('Something went wrong', 'danger')
-    return redirect(url_for("signup"))
+    if session["is_login_signup"]:
+        return redirect(url_for("signup"))
+    return redirect(url_for("forgot"))
 
 
 
@@ -304,6 +325,101 @@ def login():
     else:
         return render_template("login.html" ,form = form)
 
+
+################################################################  Forgot - Enter Mob
+
+@app.route('/forgot', methods=['GET','POST'])
+def forgot():
+    form = forgotmob(request.form)
+    session["is_login_signup"] = False  # To reuse the resend endpoint
+    if request.method == 'POST' and form.validate():
+        mob_num = form.mob_num.data
+
+        users = db.child("Users").get().val()
+        user = None
+        user_id = None
+
+        for x in users:
+            if users[x]['mob_num'] == mob_num :
+                user = users[x]
+                user_id = x
+                print(user)
+                break
+
+        if user is None:
+            app.logger.info("Udd gye tote in forgot mode")
+            flash('Please check your credentials', 'danger')
+            return redirect(url_for('forgot'))
+
+        else:
+            app.logger.info("Welcome")
+
+            session['username'] = user['name']
+            session['mob_num'] = user['mob_num']
+            session['user_id'] = user_id
+
+            flash('Welcome ' + user['name'] + '!', 'success')
+            print(session)
+
+            status,otp_temp,time_otp = getOTPApi(mob_num)
+            session['current_otp']   = otp_temp
+            session['current_time']  = time_otp
+
+            if status:
+                return redirect(url_for("forgot_verify_otp"))
+
+            flash('Something went wrong', 'danger')
+            return redirect(url_for("forgot"))
+
+    else:
+        return render_template("forgot_mob.html" ,form = form)
+
+
+################################################################  Forgot - Enter OTP
+
+@app.route('/forgot_verify_otp', methods=['GET','POST'])
+def forgot_verify_otp():
+    if request.method == 'POST':
+        r_otp = request.form["forgot_otp"]
+
+        t1 = time.time()
+
+        if((t1 - session.get('current_time')) < 150):
+            if( session.get('current_otp') == int(r_otp)):
+                session["current_time"] = -1
+                flash('You can now enter your new password', 'success')
+                return redirect(url_for("update_password"))
+            else:
+                flash('wrong otp', 'danger')
+                return redirect(url_for("forgot"))
+
+        flash('otp was expired, please resend OTP', 'danger')
+        return redirect(url_for("forgot_verify_otp"))
+    
+    return render_template("forgot_verify_otp.html")
+
+
+
+################################################################  Forgot - Update Password
+
+@app.route('/update_password', methods=['GET','POST'])
+def update_password():
+    form = forgotpass(request.form)
+    if request.method == 'POST' and form.validate():
+        password = hashlib.sha256(str(form.password.data).encode())
+        password = password.hexdigest()
+
+        user_id = session['user_id']
+
+        usr_ref = db.child("Users").child(user_id)
+        usr_ref.update({
+            'password':password
+        })
+
+        flash('you have successfully changed password and can log in', 'success')
+        return redirect(url_for("login"))
+    
+    return render_template("forgot_change_pass.html",form = form)
 
 
 

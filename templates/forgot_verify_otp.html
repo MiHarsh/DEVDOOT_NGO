@@ -1,0 +1,37 @@
+{% extends 'signup-login-layout.html' %}
+
+{% block body %}
+
+
+{% from "includes/_formhelpers.html" import render_field %}
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<div class="container">
+  <h1>OTP Verification</h1>
+
+  <form action="/forgot_verify_otp" method="POST" enctype="multipart/form-data">
+
+    <div>
+      <p class="label">Enter your OTP</p>
+      <input type="text" name="forgot_otp">
+    </div>
+
+    <div clas="btn">
+      <button type="submit">Verify</button>
+    </div>
+
+  </form>
+
+  <div clas="btn">
+    <a href="/resendOTP"><button type="submit" >Resend OTP</button></a>
+  </div>
+
+</div>
+
+
+
+
+
+{% endblock %}
