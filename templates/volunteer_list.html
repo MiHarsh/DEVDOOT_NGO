@@ -25,34 +25,28 @@
     <br>
 
 
-
-    <div class="table-responsive">  
-
-    <table class="table table-responsibe" style="text-align: center;">
-      <thead class="thead-dark">
+    <table class="tab">
+      <thead>
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">City</th>
-            <th scope="col">Proffesion</th>
-            {%  if admin_number==this_User_num %}
-            <th scope="col">View</th>
-            <!--<th scope="col">Mobile Number</th>
-            <th scope="col">Email</th>
-            <th scope="col">Remove</th>-->
-            {% endif %}
+          <th>S/N</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Profession</th>
+          {% if admin_number==this_User_num %}
+          <th>Mob Number</th>
+          <th >View</th>
+          {% endif %}
         </tr>
       </thead>
       <tbody id="volTable">
-        {% set count=0 %}
         {% for vol in v_info %}
-          {% set count=count+1 %}
-          <tr>
+          {% if admin_number==this_User_num %}
+          <tr id="vollistadmin">
+            <td>{{ loop.index }}</td>
             <td>{{v_info[vol]['name']}}</td>
             <td>{{v_info[vol]['city']}}</td>
             <td>{{v_info[vol]['Profession']}}</td>
-
-            {% if  session['is_admin'] %}
-              
+            <td>{{v_info[vol]['mob_num']}}</td>
               <td>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ loop.index }}">
                   View
@@ -73,8 +67,8 @@
                         <b>Profession: </b>{{v_info[vol]['Profession']}}<br>
                         <b>Mob Number: </b>{{v_info[vol]['mob_num']}}<br>
                         <b>Email: </b> {{v_info[vol]['email']}}<br>
-                        <b> Delet: </b> <form action="/remove_volunteer/{{ vol }}" method="POST" enctype="multipart/form-data">
-                          <button class="btn btn-danger">Delet</button>
+                        <b> Delete: </b> <form action="/remove_volunteer/{{ vol }}" method="POST" enctype="multipart/form-data">
+                          <button class="btn btn-danger">Delete</button>
                         </form>
                       </div>
                       <div class="modal-footer">
@@ -84,14 +78,18 @@
                   </div>
                 </div>
               </td>
-
-            {% endif %}
           </tr>
+          {% else %}
+          <tr id="vollistuser">
+            <td>{{ loop.index }}</td>
+            <td>{{v_info[vol]['name']}}</td>
+            <td>{{v_info[vol]['city']}}</td>
+            <td>{{v_info[vol]['Profession']}}</td>
+          </tr>
+          {% endif %}
         {% endfor %}
       </tbody>
     </table>
-    
-    </div>
     </div>
 
 
@@ -104,17 +102,18 @@
 
             let t_body = document.getElementById('volTable');
             let v_info=t_body.getElementsByTagName('tr');
+            console.log(v_info)
 
             for (var i=0 ; i<v_info.length ; i++)
             {
 
-                var t_n=v_info[i].getElementsByTagName('td')[0];
+                var t_n=v_info[i].getElementsByTagName('td')[1];
                 var t_name=(t_n.textContent||t_n.innerHTML);
 
-                var t_s=v_info[i].getElementsByTagName('td')[1];
+                var t_s=v_info[i].getElementsByTagName('td')[2];
                 var t_city=(t_s.textContent||t_s.innerHTML);
 
-                var t_p=v_info[i].getElementsByTagName('td')[2];
+                var t_p=v_info[i].getElementsByTagName('td')[3];
                 var t_proff=(t_p.textContent||t_s.innerHTML);
 
                 if(t_proff.toLocaleUpperCase().indexOf(filter2) > -1){
