@@ -241,3 +241,133 @@ align-items: center; */
   }
 }
 
+/* for tables*/
+.tab {
+  width: 90%;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tab th {
+  background: rgb(252, 176, 35);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  height: 34px;
+  text-align: center !important;
+}
+.tab td {
+  height: 28px;
+  text-align: center !important;
+}
+.tab td,
+.tab th {
+  padding: 6px;
+  border: 1px solid rgb(241, 222, 160);
+  text-align: left;
+}
+/* 
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Force table to not be like tables anymore */
+  .tab,
+  .tab thead,
+  .tab tbody,
+  .tab th,
+  .tab td,
+  .tab tr {
+    display: block;
+  }
+
+  /* Hide table headers (but not display: none;, for accessibility) */
+  .tab thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .tab tr {
+    border: 1px solid #ccc;
+  }
+
+  .tab td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 40%;
+  }
+
+  .tab td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 35%;
+    padding-right: 5px;
+    white-space: nowrap;
+    background: rgb(252, 176, 35);
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 3px;
+  }
+}
+/* button styling*/
+.tab .btn-detail {
+  border-color: rgb(252, 176, 35);
+  border-radius: 10%;
+  font-weight: 600;
+}
+.tab .btn-detail:hover {
+  background-color: rgb(252, 201, 35);
+}
+.tab .btn-status {
+  background-color: rgb(4, 250, 4);
+  border-color: rgb(21, 214, 21);
+  border-radius: 10%;
+  font-weight: 600;
+}
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  /*
+	Label the data of volunteer list for admin
+	*/
+
+  .tab #vollistadmin td:nth-of-type(1):before {
+    content: 'S/N';
+  }
+  .tab #vollistadmin td:nth-of-type(2):before {
+    content: 'NAME';
+  }
+  .tab #vollistadmin td:nth-of-type(4):before {
+    content: 'PROFESSION';
+  }
+  .tab #vollistadmin td:nth-of-type(3):before {
+    content: 'CITY';
+  }
+  .tab #vollistadmin td:nth-of-type(6):before {
+    content: 'VIEW';
+  }
+  .tab #vollistadmin td:nth-of-type(5):before {
+    content: 'MOB. No';
+  }
+
+  /* label for normal user */
+  .tab #vollistuser td:nth-of-type(1):before {
+    content: 'S/N';
+  }
+  .tab #vollistuser td:nth-of-type(2):before {
+    content: 'NAME';
+  }
+  .tab #vollistuser td:nth-of-type(4):before {
+    content: 'PROFESSION';
+  }
+  .tab #vollistuser td:nth-of-type(3):before {
+    content: 'CITY';
+  }
+}
