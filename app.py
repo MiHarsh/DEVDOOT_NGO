@@ -443,22 +443,21 @@ def become_volunteer():
                 flash('Volunteers with this Number allready exist', 'danger')
                 return redirect(url_for("index"))
 
-        mob_per = "0"
+        '''mob_per = "0"
         email_per = "0"
  
         if (f_data['mob_per']).upper() == "YES":  
             mob_per="1"
         if (f_data['email_per']).upper() == "YES":  
             email_per="1"
+        '''
 
         data = {
             "name": name,
             "mob_num": mob_num,
             "email": email,
             "city": city,
-            "Profession": Profession,
-            "mob_per" : mob_per,
-            "email_per":email_per
+            "Profession": Profession
         }
         print("hiii")
         db.child("Volunteers").push(data)
@@ -488,7 +487,8 @@ def raise_request():
             "city": city,
             "issue": issue,
             "issue_subject":issue_subject,
-            "date": t_date
+            "date": t_date,
+            "status":0
         }
         admin_mail="div143har@gmail.com"
         msg = Message(str(issue_subject) + " - " + str(city), sender='div143har@gmail.com', recipients=[admin_mail])
@@ -531,8 +531,10 @@ def my_raised_request():
 @app.route("/delete_raised_request" + "/<req_id>", methods=['POST'])
 def delete_raised_request(req_id):
     print(req_id)
-    db.child("Users/" + session['user_id']+"/raised_requests/"+req_id).remove()
-    flash('Raised Request Deleted', 'success')
+    db.child("Users/" + session['user_id']+"/raised_requests/"+req_id).update({
+            'status':1
+        })
+    flash('Congratulations ,Hope your are  safe!!', 'success')
     return redirect(url_for('my_raised_request'))
 
 
@@ -564,7 +566,7 @@ def logout():
 
 ####################################################  Only for  admin
 
-#########################################  ALL RAISED ISSUE
+#########################################  ALL pending RAISED ISSUE
 
 @app.route('/pending_raised_issue')
 @is_admin
@@ -576,6 +578,19 @@ def pending_raised_issue():
         this_User_num=session['mob_num']
     users = db.child("Users").get().val()
     return render_template("pending_raised_issue.html", this_User=this_User , users=users ,this_User_num=this_User_num ,admin_number=admin_number)
+
+#########################################  ALL solved RAISED ISSUE
+
+@app.route('/solved_raised_issue')
+@is_admin
+def solved_raised_issue():
+    this_User=""
+    this_User_num=""
+    if 'logged_in' in session:
+        this_User =session['username']
+        this_User_num=session['mob_num']
+    users = db.child("Users").get().val()
+    return render_template("solved_raised_issue.html", this_User=this_User , users=users ,this_User_num=this_User_num ,admin_number=admin_number)
 
 ####################################### Remove Volunteer
 

@@ -24,31 +24,74 @@
     </form>
     <br>
 
-    <div class="volunteer" id ="volTable">
-        {% for vol in v_info %}
-        <div class="card">
-          <div>
-            <p style="font-size: 1.4rem">{{v_info[vol]['name']}}</p>
-            <hr />
-            <p><b>Place </b>: {{v_info[vol]['city']}}</p>
-            <p><b>Profession </b>: {{v_info[vol]['Profession']}}</p>
-            {% if session['is_admin'] %}
-            <p><b>Mob: </b>: {{v_info[vol]['mob_num']}}</p>
-            <p><b>Email </b>: {{v_info[vol]['email']}}</p>
-            {% endif %}
-            {% if admin_number==this_User_num %}
-          </br>
-              <form action="/remove_volunteer/{{ vol }}" method="POST" enctype="multipart/form-data" >
-                <button class="btn btn-danger" style="position: absolute;bottom: 0;">Delete</button>
-              </form>
-            
-            {% endif %}
-          </div>
-        </div>
-        {% endfor %}
-        </div>
 
-  
+
+    <div class="table-responsive">  
+
+    <table class="table table-responsibe" style="text-align: center;">
+      <thead class="thead-dark">
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">City</th>
+            <th scope="col">Proffesion</th>
+            {%  if admin_number==this_User_num %}
+            <th scope="col">View</th>
+            <!--<th scope="col">Mobile Number</th>
+            <th scope="col">Email</th>
+            <th scope="col">Remove</th>-->
+            {% endif %}
+        </tr>
+      </thead>
+      <tbody id="volTable">
+        {% set count=0 %}
+        {% for vol in v_info %}
+          {% set count=count+1 %}
+          <tr>
+            <td>{{v_info[vol]['name']}}</td>
+            <td>{{v_info[vol]['city']}}</td>
+            <td>{{v_info[vol]['Profession']}}</td>
+
+            {% if  session['is_admin'] %}
+              
+              <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ loop.index }}">
+                  View
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal{{ loop.index }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{v_info[vol]['name']}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body" style="text-align: left;">
+                        <b>City: </b>{{v_info[vol]['city']}}<br>
+                        <b>Profession: </b>{{v_info[vol]['Profession']}}<br>
+                        <b>Mob Number: </b>{{v_info[vol]['mob_num']}}<br>
+                        <b>Email: </b> {{v_info[vol]['email']}}<br>
+                        <b> Delet: </b> <form action="/remove_volunteer/{{ vol }}" method="POST" enctype="multipart/form-data">
+                          <button class="btn btn-danger">Delet</button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    </div>
     </div>
 
 
@@ -60,20 +103,18 @@
 
 
             let t_body = document.getElementById('volTable');
-            let v_info=t_body.getElementsByClassName('card');
-            console.log(t_body);
-            console.log("$$3")
-            console.log(v_info);
+            let v_info=t_body.getElementsByTagName('tr');
+
             for (var i=0 ; i<v_info.length ; i++)
             {
 
-                var t_n=v_info[i].getElementsByTagName('p')[0];
+                var t_n=v_info[i].getElementsByTagName('td')[0];
                 var t_name=(t_n.textContent||t_n.innerHTML);
 
-                var t_s=v_info[i].getElementsByTagName('p')[1];
+                var t_s=v_info[i].getElementsByTagName('td')[1];
                 var t_city=(t_s.textContent||t_s.innerHTML);
 
-                var t_p=v_info[i].getElementsByTagName('p')[2];
+                var t_p=v_info[i].getElementsByTagName('td')[2];
                 var t_proff=(t_p.textContent||t_s.innerHTML);
 
                 if(t_proff.toLocaleUpperCase().indexOf(filter2) > -1){

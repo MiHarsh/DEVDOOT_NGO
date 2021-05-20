@@ -6,6 +6,8 @@
 <div class="container" style="background-color:white; padding: 2%; margin-top: 1%; margin-bottom: 2%;">
          
 <br>
+<h1 style="text-align: center;">Solved Issue</h1>
+<hr>
 
 <form id="pending_issue_search">
     <div class="form-group" style="display: flex; justify-content: space-around;">
@@ -37,7 +39,7 @@
     <tbody id="requTable">
         {% for user in users %}
             {% for request in users[user]['raised_requests']%}
-                {% if users[user]['raised_requests'][request]['status']==0 %}
+                {% if users[user]['raised_requests'][request]['status']==1 %}
                 <tr>
                     <td>{{ users[user]['name'] }}</td>
                     <td>{{ users[user]['raised_requests'][request]['city'] }}</td>

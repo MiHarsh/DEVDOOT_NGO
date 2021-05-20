@@ -241,37 +241,3 @@ align-items: center; */
   }
 }
 
-/* volunteer css goes here --->   */
-
-.volunteer {
-  display: flex;
-  padding: 1%;
-  justify-content: space-evenly;
-}
-.volunteer .card {
-  border: 4px rgb(255, 159, 104) solid;
-  opacity: 1;
-  background-color: #fcfcfc;
-  border-radius: 1em;
-  width: 300px;
-  min-height: 250px;
-  padding: 25px;
-  margin: 1%;
-  box-shadow: 3px 3px rgb(243, 168, 5);
-  /* transition: all 0.9s ease-out; */
-  font-size: 20px;
-}
-.volunteer .card:hover {
-  /* transform: scale(1.1); */
-}
-@media (max-width: 850px) {
-  .volunteer {
-    flex-wrap: wrap;
-    padding: 1.5rem;
-  }
-  .volunteer .card {
-    margin-top: 0.5rem;
-    width: 200px;
-    padding: 1rem;
-  }
-}
