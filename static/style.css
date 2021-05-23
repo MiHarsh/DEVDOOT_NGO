@@ -538,3 +538,125 @@ and also iPads specifically.
   }
 
 }
+
+
+/* blog style */
+
+*,
+*::before ,
+*::after{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+}
+.blog{
+   
+    padding-top:20px;
+    width:100%;
+    display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background-color: #eee;
+   padding: 0 20px;
+   padding-bottom: 6px;
+
+}
+.blog-post{
+	max-width: 500px;
+	margin-top: 30px;
+     width: 70%;
+     max-width: 98rem;
+     background-color: #fff;
+     padding: 35px;
+     box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
+     display: flex;
+     align-items: center;
+     border-radius: .8rem;
+}
+
+.blog-post_date span{
+	display: block;
+	color: rgba(0,0,0,.5);
+	font-size: 13px;
+	font-weight: 600;
+	margin : .5rem 0;
+}
+.blog-post_title{
+	font-size:20px;
+	margin:10px 0 10px;
+	text-transform: uppercase;
+	color: #000000;
+}
+.blog-post_text{
+     margin-bottom: 15px;
+     font-size: 15px;
+     color: rgba(0,0,0,.7);
+}
+ .buttons .blog-post_cta{
+ 	float: left;
+	font-family: Arial;
+	display: inline-block;
+	padding: 10px 14px;
+	letter-spacing: 1px;
+	color:#000;
+	background-image: linear-gradient(to right, #f78e16 0%,  #feae0093 100%);
+	border-radius: .8rem;
+	text-decoration: none;
+}
+.buttons .delete{
+	float: right;
+	font-family: Arial;
+	padding: 10px 14px;
+	display: inline-block;
+	letter-spacing: 1px;
+	
+	color:#000;
+	font-weight: 600;
+	background-color: red;
+	border-radius: 12px;
+	text-decoration: none;
+}
+.buttons .delete:hover{
+	background-color: #be0000;
+	transition: .5s;
+}
+.blog-post_cta:hover {
+	background-image: linear-gradient(to right, #feae0093 0%, #f78e16 100%);
+
+}
+
+@media screen and (max-width: 868px){
+	.blog-post {
+		padding: 30px;
+		flex-direction: column;
+		}
+	    
+	    .buttons .delete{
+	    	padding: 10px 20px;
+	    }
+        .buttons .blog-post_cta{
+        	padding: 10px 20px;
+        }
+}
+
+@media screen and (max-width: 768px){
+	.buttons .delete{
+	    	padding: 10px 10px;
+	    	
+	    }
+        .buttons .blog-post_cta{
+        	padding: 10px 10px;
+	    	
+        }
+        .blog-post {
+		padding: 12px;
+		flex-direction: column;
+		 width: 95%;
+		}
+    .blog{
+			padding:0 2px;
+		}
+}
+
+
