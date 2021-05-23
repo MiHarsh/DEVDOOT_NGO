@@ -1,94 +1,178 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
 *{
-    margin: 0;
-    paddiang: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  body{
-    width: 100%;
-    height: 100vh;
-  }
-  
-  .container{
-    width: 500px;
-    margin: auto;
-    margin-top: 40px;
-  }
-  
-  form{
-    display: flex;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+body{
+  background: #f2f2f2;
+  padding: 0 10px;
+}
+.ovf .wrapper{
+  max-width: 500px;
+  width: 100%;
+  background: #fff;
+  margin: 50px auto;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.125);
+  padding: 30px;
+  border-top: 3px solid orange;
+}
+
+.ovf .wrapper .title{
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #fe8b07;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.ovf .wrapper .form{
+  width: 100%;
+}
+
+.ovf .wrapper .form .inputfield{
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.ovf .wrapper .form .inputfield label{
+   width: 200px;
+   color: #757575;
+   margin-right: 10px;
+  font-size: 14px;
+}
+
+.ovf .wrapper .form .inputfield .input,
+.ovf .wrapper .form .inputfield .textarea{
+  width: 100%;
+  outline: none;
+  border: 1px solid #d5dbd9;
+  font-size: 15px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.ovf .wrapper .form .inputfield .textarea{
+  width: 100%;
+  height: 125px;
+  resize: none;
+}
+
+.ovf .wrapper .form .inputfield .custom_select{
+  position: relative;
+  width: 100%;
+  height: 37px;
+}
+
+.ovf .wrapper .form .inputfield .custom_select:before{
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  border: 8px solid;
+  border-color: #d5dbd9 transparent transparent transparent;
+  pointer-events: none;
+}
+
+.ovf .wrapper .form .inputfield .custom_select select{
+  -webkit-appearance: none;
+  -moz-appearance:   none;
+  appearance:        none;
+  outline: none;
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  padding: 8px 10px;
+  font-size: 15px;
+  border: 1px solid #d5dbd9;
+  border-radius: 3px;
+}
+
+
+.ovf .wrapper .form .inputfield .input:focus,
+.ovf .wrapper .form .inputfield .textarea:focus,
+.ovf .wrapper .form .inputfield .custom_select select:focus{
+  border: 1px solid #fe8b07;
+}
+
+.ovf .wrapper .form .inputfield p{
+   font-size: 14px;
+   color: #757575;
+}
+.ovf .wrapper .form .inputfield .check{
+  width: 15px;
+  height: 15px;
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+.ovf .wrapper .form .inputfield .check input[type="checkbox"]{
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.ovf .wrapper .form .inputfield .check .checkmark{
+  width: 15px;
+  height: 15px;
+  border: 1px solid #fec107;
+  display: block;
+  position: relative;
+}
+.ovf .wrapper .form .inputfield .check .checkmark:before{
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  width: 5px;
+  height: 2px;
+  border: 2px solid;
+  border-color: transparent transparent #fff #fff;
+  transform: rotate(-45deg);
+  display: none;
+}
+.ovf .wrapper .form .inputfield .check input[type="checkbox"]:checked ~ .checkmark{
+  background: #fe8b07;
+}
+
+.ovf .wrapper .form .inputfield .check input[type="checkbox"]:checked ~ .checkmark:before{
+  display: block;
+}
+
+.ovf .wrapper .form .inputfield .btn{
+  width: 100%;
+   padding: 8px 10px;
+  font-size: 15px; 
+  border: 0px;
+  background:  #fe8b07;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 3px;
+  outline: none;
+}
+
+.ovf .wrapper .form .inputfield .btn:hover{
+  background: #fe8b07;
+}
+
+.ovf .wrapper .form .inputfield:last-child{
+  margin-bottom: 0;
+}
+
+@media (max-width:420px) {
+  .ovf .wrapper .form .inputfield{
     flex-direction: column;
-    align-items: center;
-    padding: 10px 30px;
+    align-items: flex-start;
   }
-  
-  h1{
-    text-align: center;
-    letter-spacing: 2px;
+  .ovf .wrapper .form .inputfield label{
+    margin-bottom: 5px;
   }
-  
-  form div{
-   display: flex;
-   flex-direction: column;
-   width: 100%;
+  .ovf .wrapper .form .inputfield.terms{
+    flex-direction: row;
   }
-  
-  .label, form div input{
-    font-size: 1.3rem;
-  }
-  
-  .label {
-    transform: translateY(100%) scale(0.9) translateX(-20px);
-    transition: 0.2s linear;
-    position: relative;
-    opacity: 0.7;
-    font-weight: 700;
-    letter-spacing: 2px;
-    font-size: 1rem;
-  }
-  
-  .label-up{
-    transform: translateY(0) translateX(0);
-    opacity: 1;
-  }
-  
-  .leave-down{
-    transform: translateY(0);
-  }
-  
-  
-  form div input{
-    height: 2rem;
-    width: 100%;
-    border: none;
-    border-bottom: 2px solid #000;
-    position: relative;
-    background-color: transparent;
-    margin-bottom: 25px;
-    outline: none;
-    font-size: 1.3rem;
-    padding: 2px;
-    color: rgba(0,0,0,0.7)
-  }
-  
-  form div button{
-    margin: 20px 20%;
-    font-size: 1rem;
-    padding: 8px 0;
-    border: none;
-    transition: 0.2s ease-in;
-  }
-  
-  form div button:hover{
-    background-color: rgb(197, 197, 197);
-  }
-  
-  form div small{
-    font-size: 1rem;
-    border: none;
-    text-align: center;
-    color: rgb(35, 168, 242);
-  }
-  
-  
+}
