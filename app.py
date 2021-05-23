@@ -603,6 +603,59 @@ def remove_volunteer(req_id):
     return redirect(url_for('volunteer_list'))
 
 
+####################################################################################### adding Blog by admin
+
+@app.route('/add_blog' , methods=['GET','POST'] )
+@is_admin
+def add_blog():
+    if request.method == 'POST':
+        f_data = request.form
+        author = f_data['author']
+        title = f_data['title']
+        main_body=f_data['main_body']
+        today = datetime.datetime.now()
+        t_date = today.strftime("%d") + "/" + today.strftime("%m") + "/" + today.strftime("%Y")
+        p_time = today.strftime("%H") + ":" + today.strftime("%M") + ":" + today.strftime("%S")
+        data = {
+            "author": author,
+            "time":p_time,
+            "date":t_date,
+            "title": title,
+            "main_body": main_body,
+            "user_id":session['user_id']
+        }
+        db.child("blogs").push(data)
+        flash('Your Blog has been Shared', 'success')
+        return redirect(url_for('blogs'))
+    this_User=""
+    this_User_num=""
+    if 'logged_in' in session:
+        this_User =session['username']
+        this_User_num=session['mob_num']
+    return render_template("add_blog.html", this_User=this_User , this_User_num=this_User_num ,admin_number=admin_number)
+    
+################################################################################################ delete blog
+
+
+@app.route("/delete_blog" + "/<blog_id>", methods=['POST'])
+@is_admin
+def delete_blog(blog_id):
+    db.child("blogs/"+blog_id).remove()
+    flash('Blog Deleted', 'success')
+    return redirect(url_for('blogs'))
+
+############################################################################################## Blogs view page
+
+@app.route("/blogs")
+def blogs():
+    blogs = db.child("blogs").get().val()
+    this_User=""
+    this_User_num=""
+    if 'logged_in' in session:
+        this_User =session['username']
+        this_User_num=session['mob_num']
+    return "hii"##render_template("blogs.html", this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
+
 #######################################################################################################
 
 if __name__ == '__main__':
