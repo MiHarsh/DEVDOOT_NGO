@@ -13,16 +13,36 @@
 
   <form action="/forgot_verify_otp" method="POST" enctype="multipart/form-data">
 
-    <div>
-      <p class="label">Enter your OTP</p>
-      <input type="text" name="forgot_otp">
-    </div>
-
-    <div clas="btn">
-      <button type="submit">Verify</button>
+    <div class="ovf">
+      <div class="wrapper">
+        <div class="title">
+          Registration Form
+        </div>
+        <div class="form">
+           <div class="inputfield">
+          
+              <label>Enter your OTP</label>
+              <input type="text" class="input" name="forgot_otp">
+            
+           </div>  
+          <div class="inputfield">
+            <input type="submit" value="Verify" class="btn">
+          </div>
+        </div>
+      </div>
     </div>
 
   </form>
+
+
+
+
+
+
+
+
+
+
 
   <div clas="btn">
     <a href="/resendOTP"><button type="submit" >Resend OTP</button></a>

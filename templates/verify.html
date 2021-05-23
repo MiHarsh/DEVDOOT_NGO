@@ -7,28 +7,39 @@
 
 
 
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<div class="container">
-  <h1>OTP Verification</h1>
+<!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<div class="container"> -->
 
-  <form action="/verifyOTP" method="POST" enctype="multipart/form-data">
 
-    <div>
-      <p class="label">Enter your OTP</p>
-      <input type="text" name="otp">
-    </div>
+<form action="/verifyOTP" method="POST" enctype="multipart/form-data">
+  <div class="ovf">
+    <div class="wrapper">
+      <div class="title">
+        Registration Form
+      </div>
+      <div class="form">
+         <div class="inputfield">
+        
+            <label>Enter your OTP</label>
+            <input type="text" class="input" name="otp">
+          
+         </div>  
+        <div class="inputfield">
+          <input type="submit" value="Verify" class="btn">
+        </div>
+      </div>
+  </div>
+  </div>
 
-    <div clas="btn">
-      <button type="submit">Verify</button>
-    </div>
+</form>
 
-  </form>
+
 
   <div clas="btn">
     <a href="/resendOTP"><button type="submit" >Resend OTP</button></a>
   </div>
 
-</div>
+<!-- </div> -->
 
 
 
