@@ -6,88 +6,42 @@
 
 
 
-<!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<div class="container">
-  <h1>Become Volunteer</h1>
-  <form action="/raise_request" method="POST" enctype="multipart/form-data">
-
-    <div>
-      <p class="label">Issue Subject</p>
-      <input type="text" name="issue_subject">
-    </div>
-
-    <div>
-        <p class="label">Issue</p>
-        <input type="text" name="issue">
+<form action="/raise_request" method="POST" enctype="multipart/form-data">
+  <div class="ovf">
+    <div class="wrapper">
+      <div class="title">
+        Registration Form
       </div>
-
-
-    <div>
-      <p class="label">City</p>
-      <input type="text" name="city">
-    </div>
-
-    <div clas="btn">
-      <button type="submit">Submit</button>
-    </div>
-
-
-  </form>
-</div> -->
-<div class="ovf">
-  <div class="wrapper">
-    <div class="title">
-      Registration Form
-    </div>
-    <div class="form">
-       <div class="inputfield">
-      
-          <label>Name <span style="color:#ff0000">*</span></label>
-          <input type="text" class="input">
-          
-       </div>  
-       <!-- <div class="inputfield">
-        <label>Email Address </label>
-        <input type="text" class="input">
-     </div>  -->
-     <div class="inputfield">
-      <label>Country Code </label>
-      <input type="text" class="input" placeholder="+91">
-   </div>
-   <div class="inputfield">
-    <label>Phone Number <span style="color:#ff0000">*</span></label>
-    <input type="text" class="input">
- </div> 
-<!-- 
- <div class="inputfield">
-  <label>Address</label>
-  <textarea class="textarea"></textarea>
-</div>  -->
-       <div class="inputfield">
-          <label>Password</label>
-          <input type="password" class="input">
-       </div>  
-      <div class="inputfield">
-          <label>Confirm Password</label>
-          <input type="password" class="input">
-       </div>  
+      <div class="form">
+        <div class="inputfield">
         
-       
-     
-      
-      <div class="inputfield terms">
-          <label class="check">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-          </label>
-          <p>Agreed to terms and conditions</p>
-       </div> 
-      <div class="inputfield">
-        <input type="submit" value="Register" class="btn">
+            <label>Issue Subject </label>
+            <input type="text" class="input" name="issue_subject">
+            
+        </div>  
+
+          <div class="inputfield">
+          
+            <label>Issue </label>
+            <input type="text" class="input" name="issue">
+            
+        </div> 
+
+            <div class="inputfield">
+              
+              <label>City </label>
+              <input type="text" class="input" name="city">
+              
+          </div> 
+
+        <div class="inputfield">
+          <input type="submit" value="Register" class="btn">
+        </div>
       </div>
-    </div>
-</div>
-</div>
+  </div>
+  </div>
+
+</form>
 
 
 
