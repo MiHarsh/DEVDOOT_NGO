@@ -1,0 +1,51 @@
+{% extends 'signup-login-layout.html' %}
+
+{% block body %}
+
+
+{% from "includes/_formhelpers.html" import render_field %}
+
+
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+<div class="container">
+  <h1>Add Blog</h1>
+
+  <form action="/add_blog" method="POST" enctype="multipart/form-data">
+
+    <div>
+      <p class="label">Author</p>
+      <input type="text" name="author">
+    </div>
+
+    <div>
+      <p class="label">Title</p>
+      <input type="text" name="title">
+    </div>
+
+    <div>
+      <p class="label">Para 1</p>
+      <textarea rows="10" cols="100" name="para1"></textarea>
+    </div>
+
+    <div>
+      <p class="label">Para 2</p>
+      <textarea rows="10" cols="100" name="para2"></textarea>
+    </div>
+
+    <div clas="btn">
+      <button type="submit">Post</button>
+    </div>
+
+  </form>
+
+</div>
+
+
+
+<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script>
+  CKEDITOR.replace('body');
+</script>
+
+{% endblock %}

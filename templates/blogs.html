@@ -2,113 +2,73 @@
 
 {% block body %}
 
+<style>
+  .post_body{
+    
+    word-break: break-word;
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   line-height: 19px; /* fallback */
+   max-height: 45px; /* fallback */
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
+
+  }
+</style>
 
 <div class="blog">	
   
+    {% for blog in blogs%}
     <div  class="blog-post">
-        
-  
-        <div class="blog-post_info">
+      <div class="blog-post_info">
         <div class="blog-post_date">    
-         <i class="fa fa-user-circle " area-hidden="true" style="font-size:28px;"></i>
-             Author
-          </div>
-            <div class="blog-post_date">    
-        <span>DATE</span>
-       </div>
-       <hr width=90% >
-          <h1 class="blog-post_title"> TITLE</h1>
-           <p class="blog-post_text">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-        oident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-          </p> 
-         <div class="buttons"><a href=""  class="blog-post_cta">Read more</a> <a href=""  class="delete">Delete</a></div>
+          <i class="fa fa-user-circle " area-hidden="true" style="font-size:28px;"></i>
+          {{ blogs[blog]['author'] }}
         </div>
-       
+
+        <div class="blog-post_date">    
+          <span>{{ blogs[blog]['date'] }}</span>
+        </div>
+
+        <hr width="90%" >
+        <h1 class="blog-post_title"> {{ blogs[blog]['title'] }} </h1>
+        <p class="blog-post_text post_body" id="blog_body{{loop.index}}s" >
+          {{ blogs[blog]['para1'] }}
+          <br>
+          <br>
+          {{ blogs[blog]['para2'] }}
+        </p> 
+
+        <div class="buttons">
+
+          <a type="button" class="blog-post_cta" id="blog_body{{loop.index}}" onclick="toggleread.call(this)">Read more</a> 
+          {% if this_User_num == admin_number %}
+            <form action="/delete_blog/{{ blog }}" method="POST" enctype="multipart/form-data">
+              <button  type="submit" class="delete">Delete</button>
+            </form>
+          {% endif %}
+        </div>
+
+      </div>
     </div>
-    <div  class="blog-post">
-        
-  
-     <div class="blog-post_info">
-      <div class="blog-post_date">    
-       <i class="fa fa-user-circle " area-hidden="true" style="font-size:28px;"></i>
-       Author
-        </div>
-        <div class="blog-post_date">    
-      <span>DATE</span>
-     </div>
-     <hr width=90% >
-        <h1 class="blog-post_title"> TITLE</h1>
-        <p class="blog-post_text">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-        proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-      oident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.L
-       </p> 
-      <div class="buttons"><a href=""  class="blog-post_cta">Read more</a> <a href=""  class="delete ">Delete</a></div>
-     </div>
-     
-  </div>
-  
-   
+    {% endfor %}
    
     
-  </div>
+</div>
+
+<script>
+
+
+  function toggleread() {
+    var id = this.id;
+    id+='s';
+    console.log(id);
+    document.getElementById(id).classList.toggle('post_body')
+  }
+
+
+</script>
+
 
 {% endblock %}

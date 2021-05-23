@@ -612,7 +612,8 @@ def add_blog():
         f_data = request.form
         author = f_data['author']
         title = f_data['title']
-        main_body=f_data['main_body']
+        para1=f_data['para1']
+        para2=f_data['para2']
         today = datetime.datetime.now()
         t_date = today.strftime("%d") + "/" + today.strftime("%m") + "/" + today.strftime("%Y")
         p_time = today.strftime("%H") + ":" + today.strftime("%M") + ":" + today.strftime("%S")
@@ -621,7 +622,8 @@ def add_blog():
             "time":p_time,
             "date":t_date,
             "title": title,
-            "main_body": main_body,
+            "para2": para2,
+            "para1":para1,
             "user_id":session['user_id']
         }
         db.child("blogs").push(data)
@@ -654,7 +656,7 @@ def blogs():
     if 'logged_in' in session:
         this_User =session['username']
         this_User_num=session['mob_num']
-    return "hii"##render_template("blogs.html", this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
+    return render_template("blogs.html", this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
 #######################################################################################################
 
