@@ -7,20 +7,32 @@
 
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<div class="container">
-  <h1>Enter Mobile Number</h1>
-  <form tabindex="502" method="POST" action="/forgot">
-    <div>
-      {{render_field(form.mob_num, class_="form-control")}}
-    </div>
 
-    <div>
-        <button type="submit">Reset Password</button>
+
+
+<form tabindex="502" method="POST" action="/forgot">
+  <div class="ovf">
+    <div class="wrapper">
+      {% include 'includes/_messages.html' %}
+      <div class="title">
+        Enter Mobile Number
+      </div>
+      <div class="form">
+
+        <div class="inputfield">
+          <!--<label>Password</label>-->
+          {{render_field(form.mob_num, class_="form-control")}}
+       </div>
+
+        <div class="inputfield">
+          <input type="submit" value="Reset Password" class="btn">
+        </div>
+
+      </div>
     </div>
-    
-  </form>
-  
-</div>
+  </div>
+</form>
+
 
 
 

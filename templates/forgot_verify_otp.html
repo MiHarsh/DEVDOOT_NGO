@@ -8,50 +8,35 @@
 
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<div class="container">
-  <h1>OTP Verification</h1>
+
 
   <form action="/forgot_verify_otp" method="POST" enctype="multipart/form-data">
 
     <div class="ovf">
       <div class="wrapper">
         <div class="title">
-          Registration Form
+          OTP Verification
         </div>
         <div class="form">
-           <div class="inputfield">
-          
-              <label>Enter your OTP</label>
-              <input type="text" class="input" name="forgot_otp">
-            
-           </div>  
+
+          <div class="inputfield">
+            <label>Enter your OTP</label>
+            <input type="text" class="input" name="forgot_otp">
+          </div>  
+
           <div class="inputfield">
             <input type="submit" value="Verify" class="btn">
           </div>
+
         </div>
+        
       </div>
     </div>
 
   </form>
 
-
-
-
-
-
-
-
-
-
-
-  <div clas="btn">
-    <a href="/resendOTP"><button type="submit" >Resend OTP</button></a>
+  <div clas="inputfield" style="text-align: center;">
+    <b><button type="submit" class="btn btn-dabger"><a href="/resendOTP">Resend OTP</a></button></b>
   </div>
-
-</div>
-
-
-
-
 
 {% endblock %}

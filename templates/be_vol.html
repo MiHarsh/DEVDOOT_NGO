@@ -7,51 +7,58 @@
 
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<div class="container">
-  <h1>Become Volunteer</h1>
+
 <form action="/become_volunteer" method="POST" enctype="multipart/form-data">
 
     <div class="ovf">
       <div class="wrapper">
         <div class="title">
-          Registration Form
+          Volunteer Registration Form
         </div>
-        <div class="form">
+          <div class="form">
     
             <div class="inputfield">
               <label>Email Address </label>
-              <input type="text" class="input" name="email" >
+              <input type="email" class="input" name="email" maxlength="60" required>
             </div> 
     
             <div class="inputfield">
               <label>City </label>
-              <input type="text" class="input" name="city">
+              <input type="text" class="input" name="city" maxlength="60" required>
             </div> 
     
             <div class="inputfield">
               <label>Profession </label>
-              <input type="text" class="input" name="Profession">
-            </div>       
+              <input type="text" class="input" name="Profession" maxlength="80" required>
+            </div> 
+            
+            <div class="inputfield terms">
+              <label class="check">
+                <input type="checkbox"  id="priv" onclick="isagree()">
+                <span class="checkmark"></span>
+              </label>
+              <p>I have read and agree to the privacy policy</p>
+            </div> 
     
-          <div class="inputfield">
-            <input type="submit" value="Register" class="btn">
+            <div class="inputfield">
+              <input id="submit_btn" type="submit" value="Register" class="btn">
+            </div>
           </div>
-        </div>
-    </div>
+      </div>
     </div>
 
   </form>
-</div>
 
-
-
-
-
-
-
-
-
-
+  <script>
+    document.getElementById("submit_btn").disabled = true;
+    const isagree = () =>{
+      if(document.getElementById("priv").checked){
+        document.getElementById("submit_btn").disabled = false;
+      }else{
+        document.getElementById("submit_btn").disabled = true;
+      }
+    }
+  </script>
 
 
 {% endblock %}

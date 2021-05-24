@@ -28,6 +28,14 @@
           {{render_field(form.password, class_="form-control")}}
        </div>
 
+        <div class="inputfield terms">
+          <label class="check">
+            <input type="checkbox"  onclick="is_visible()">
+            <span class="checkmark"></span>
+          </label>
+          <p>Show Password</p>
+        </div>
+
         <div class="inputfield">
           <input type="submit" value="Login" class="btn">
         </div>
@@ -43,6 +51,19 @@
   </div>
 </form>
 
+<script>
+
+  const is_visible = () =>{
+
+    var x=document.getElementById("password")
+    if(x.type === "password"){
+      x.type = "text";
+    }else{
+      x .type= "password";
+    }
+  }
+
+</script>
 
 
 {% endblock %}

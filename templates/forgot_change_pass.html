@@ -6,23 +6,32 @@
 
 
 
+
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<div class="container">
-  <h1>Enter New Password</h1>
-  <form tabindex="502" method="POST" action="/update_password">
 
-    <div>
-      {{render_field(form.password, class_="form-control")}}
+
+<form tabindex="502" method="POST" action="/update_password">
+  <div class="ovf">
+    <div class="wrapper">
+      {% include 'includes/_messages.html' %}
+      <div class="title">
+        Enter New Password
+      </div>
+      <div class="form">
+
+        <div class="inputfield">
+          <!--<label>Password</label>-->
+          {{render_field(form.password, class_="form-control")}}
+       </div>
+
+        <div class="inputfield">
+          <input type="submit" value="Change" class="btn">
+        </div>
+
+      </div>
     </div>
-    <div>
-        <button type="submit">Update Password</button>
-    </div>
-    
-  </form>
-  
-</div>
-
-
+  </div>
+</form>
 
 
 

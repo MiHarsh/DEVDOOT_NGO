@@ -10,38 +10,58 @@
   <div class="ovf">
     <div class="wrapper">
       <div class="title">
-        Registration Form
+        Raise Isuue
       </div>
       <div class="form">
         <div class="inputfield">
         
             <label>Issue Subject </label>
-            <input type="text" class="input" name="issue_subject">
+            <input type="text" class="input" name="issue_subject" maxlength="50" required>
             
         </div>  
 
           <div class="inputfield">
           
             <label>Issue </label>
-            <input type="text" class="input" name="issue">
+            <textarea type="text" class="input" name="issue" rows="8" maxlength="500" required></textarea>
             
         </div> 
 
             <div class="inputfield">
               
               <label>City </label>
-              <input type="text" class="input" name="city">
+              <input type="text" class="input" name="city" maxlength="100" required>
               
           </div> 
 
+          <div class="inputfield terms">
+            <label class="check">
+              <input type="checkbox"  id="priv" onclick="isagree()">
+              <span class="checkmark"></span>
+            </label>
+            <p>I have read and agree to the privacy policy</p>
+          </div> 
+
         <div class="inputfield">
-          <input type="submit" value="Register" class="btn">
+          <input id="submit_btn" type="submit" value="Raise" class="btn">
         </div>
       </div>
   </div>
   </div>
 
 </form>
+
+<script>
+  document.getElementById("submit_btn").disabled = true;
+  const isagree = () =>{
+    console.log("hiiii")
+    if(document.getElementById("priv").checked){
+      document.getElementById("submit_btn").disabled = false;
+    }else{
+      document.getElementById("submit_btn").disabled = true;
+    }
+  }
+</script>
 
 
 

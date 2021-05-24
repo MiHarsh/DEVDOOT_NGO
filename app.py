@@ -195,11 +195,17 @@ def signup():
         name = form.name.data
         password = hashlib.sha256(str(form.password.data).encode())
         password = password.hexdigest()
+        today = datetime.datetime.now()
+        t_date = today.strftime("%d") + "/" + today.strftime("%m") + "/" + today.strftime("%Y")
+        p_time = today.strftime("%H") + ":" + today.strftime("%M") + ":" + today.strftime("%S")
 
         data = {
             "name": name,
             "mob_num": mob_num,
             "password": password,
+            "date_account_created":t_date,
+            "time_account_created":p_time,
+            "is_account_active":1,
             "raised_requests":""
         }
 
@@ -451,12 +457,16 @@ def become_volunteer():
         if (f_data['email_per']).upper() == "YES":  
             email_per="1"
         '''
+        today = datetime.datetime.now()
+        t_date = today.strftime("%d") + "/" + today.strftime("%m") + "/" + today.strftime("%Y")
+        p_time = today.strftime("%H") + ":" + today.strftime("%M") + ":" + today.strftime("%S")
 
         data = {
             "name": name,
             "mob_num": mob_num,
             "email": email,
             "city": city,
+            "date":t_date,
             "Profession": Profession
         }
         print("hiii")
@@ -613,7 +623,6 @@ def add_blog():
         author = f_data['author']
         title = f_data['title']
         para1=f_data['para1']
-        para2=f_data['para2']
         today = datetime.datetime.now()
         t_date = today.strftime("%d") + "/" + today.strftime("%m") + "/" + today.strftime("%Y")
         p_time = today.strftime("%H") + ":" + today.strftime("%M") + ":" + today.strftime("%S")
@@ -622,7 +631,6 @@ def add_blog():
             "time":p_time,
             "date":t_date,
             "title": title,
-            "para2": para2,
             "para1":para1,
             "user_id":session['user_id']
         }

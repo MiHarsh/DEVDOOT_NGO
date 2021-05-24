@@ -8,35 +8,78 @@
 
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<div class="container">
-  <h1>Sign Up</h1>
-  <form tabindex="502" method="POST" action="/signup">
-    <div>
-      
-      {{render_field(form.mob_num, class_="form-control")}}
-    </div>
-    <div>
-      
-      {{render_field(form.name, class_="form-control")}}
-    </div>
-    <div>
-      
-      {{render_field(form.password, class_="form-control")}}
-    </div>
-    <div>
-     
-      {{render_field(form.confirmed, class_="form-control")}}
-    </div>
-    <div>
-        <button type="submit">SignUp</button>
-    </div>
-    
-  </form>
-  <div style="text-align: center;">
-    All ready have account ? <a href="/login">Login</a>
-  </div>
-</div>
 
+
+<form tabindex="502" method="POST" action="/signup">
+  <div class="ovf">
+    <div class="wrapper">
+      {% include 'includes/_messages.html' %}
+      <div class="title">
+        Signup
+      </div>
+      <div class="form">
+
+        <div class="inputfield">
+          <label>Country Code </label>
+          <input type="text" class="input" placeholder="+91" name="c_code">
+        </div>
+        <div class="inputfield">
+          <!--<label>Phone Number <span style="color:#ff0000">*</span></label>-->
+          {{render_field(form.mob_num, class_="form-control")}}
+        </div> 
+
+        <div class="inputfield">
+          <!--<span style="color:#ff0000">*</span>-->
+          {{render_field(form.name, class_="form-control")}}
+        </div>
+
+        <div class="inputfield">
+          <!--<label>Password</label>-->
+          {{render_field(form.password, class_="form-control")}}
+        </div>
+
+        <div class="inputfield">
+        <!--<label>Password</label>-->
+        {{render_field(form.confirmed, class_="form-control")}}
+        </div>
+
+        <div class="inputfield terms">
+          <label class="check">
+            <input type="checkbox"  onclick="is_visible()">
+            <span class="checkmark"></span>
+          </label>
+          <p>Show Password</p>
+        </div>
+
+        <div class="inputfield">
+          <input type="submit" value="SignUp" class="btn">
+        </div>
+
+        <hr style="margin: 4px;">
+        <p style="text-align: center;">have an account ? <a href="/login">Login</a></p>
+
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<script>
+
+  const is_visible = () =>{
+
+    var x=document.getElementById("password");
+    var y=document.getElementById("confirmed");
+    if(x.type === "password"){
+      x.type = "text";
+      y.type= "text";
+    }else{
+      x .type= "password";
+      y.type= "password";
+    }
+  }
+
+</script>
 
 
 
