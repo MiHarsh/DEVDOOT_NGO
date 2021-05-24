@@ -7,31 +7,41 @@
 
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-<div class="container">
-  <h1>Login</h1>
-  <form tabindex="502" method="POST" action="/login">
-    <div>
-      
-      {{render_field(form.mob_num, class_="form-control")}}
-    </div>
-    <div>
-      {{render_field(form.password, class_="form-control")}}
-    </div>
-    <div>
-        <button type="submit">Login</button>
-    </div>
-    
-  </form>
-  
-  <div style="text-align: center;">
-    Dont't have account ? <a href="/signup">Signup</a>
-  </div>
-  <div style="text-align: center;">
-    <a href="/forgot">Forgot password</a>
-  </div>
-</div>
 
 
+<form tabindex="502" method="POST" action="/login">
+  <div class="ovf">
+    <div class="wrapper">
+      {% include 'includes/_messages.html' %}
+      <div class="title">
+        Login
+      </div>
+      <div class="form">
+
+        <div class="inputfield">
+          <!--<label>Phone Number <span style="color:#ff0000">*</span></label>-->
+          {{render_field(form.mob_num, class_="form-control")}}
+        </div> 
+
+        <div class="inputfield">
+          <!--<label>Password</label>-->
+          {{render_field(form.password, class_="form-control")}}
+       </div>
+
+        <div class="inputfield">
+          <input type="submit" value="Login" class="btn">
+        </div>
+
+        <div style="text-align: center; ">
+          <a href="/forgot">Forgotten password?</a>
+        </div>
+        <hr style="margin: 4px;">
+        <p style="text-align: center;">Dont't have account ? <a href="/signup">Signup</a></p>
+
+      </div>
+    </div>
+  </div>
+</form>
 
 
 
