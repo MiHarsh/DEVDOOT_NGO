@@ -21,7 +21,7 @@
   </head>
   <body>
     <div class="navbar-sticky mobile-only text-right py-2 px-4">
-      <a class="menu-hamburger-mobile" data-toggle="collapse" ref="#collapsibleNavbar" role="button" aria-expanded="false" aria-controls="collapsibleNavbar"></a>
+      <a class="menu-hamburger-mobile" data-toggle="collapse" href="#collapsibleNavbar" role="button" aria-expanded="false" aria-controls="collapsibleNavbar">
         <i class="fas fa-navicon"> </i>
       </a>
     </div>
@@ -104,8 +104,13 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"crossorigin="anonymous"></script>
     <script src="https://unpkg.com/flickity@2.2.2/dist/flickity.pkgd.min.js"></script>
-    <script src="main.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://kit.fontawesome.com/4e16efa13b.js" crossorigin="anonymous"></script>
+    <script>
+      $('.dropdown-closer').click(event => {
+        event.preventDefault();
+      })
+    </script>
   </body>
 </html>
