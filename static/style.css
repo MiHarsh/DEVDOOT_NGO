@@ -317,7 +317,7 @@ a:status {
     top: 0;
     right: 0;
     left: 0;
-    background-color: #e7ad0d;
+    background-color: #e1701a;
     z-index: 1019;
     transform: translateY(-120%);
     transition: transform 0.6s;
@@ -426,6 +426,7 @@ and also iPads specifically.
     border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 40%;
+    height: 45px;
   }
 
   .tab td:before {
@@ -628,6 +629,9 @@ and also iPads specifically.
 	background-image: linear-gradient(to right, #feae0093 0%, #f78e16 100%);
 
 }
+.blog-post_info{
+  width: 100%;
+}
 
 @media screen and (max-width: 868px){
 	.blog-post {
@@ -662,4 +666,223 @@ and also iPads specifically.
 		}
 }
 
+/* card section, about us and our work  section of index  */
+  
 
+/*card section*/
+
+.card {
+  background: rgba(255, 248, 248, 0.3);
+  width: 25%;
+  height: 75%;
+  border-radius: 3%;
+  box-shadow: 1px 3px 10px 6px #f6993b;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  transition: transform 1.2s;
+  padding: 20px;
+}
+.card:hover {
+
+  transform: scale(1.05);
+  transition: transform 0.6s;
+}
+.card img {
+  width: 97%;
+  height: 75%;
+  border-radius: 3%;
+  margin-left: 1%;
+}
+.card-btn {
+  margin:0 auto;
+  width:80%;
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #f59929;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.card-btn:hover {
+  background: #e1701a;
+  text-decoration: none;
+}
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+.card-section {
+  height: 600px;
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+}
+
+/*media query for card section*/
+@media (max-width: 750px){
+  .card-btn{
+    font-size: 16px;
+  }
+}
+
+
+
+@media(min-width:701px){
+  .card{
+    min-width: 200px;
+    margin:auto 10px;
+  }
+}
+
+
+@media (max-width: 700px) {
+  .card-section {
+    width: 100%;
+    height: 950px;
+    margin: auto;
+    flex-direction: column;
+    padding: 0 20px;
+  }
+
+  .card {
+
+    width: 100%;
+    height: 40%;
+  }
+  .needHelp {
+    margin-top: 20px;
+  }
+}
+
+/*media query our work*/
+
+@media only screen and (max-width: 900px) and (min-width: 770px) {
+  .col5 {
+    padding-top: 10%;
+    padding-bottom: 10%;
+
+  }
+}
+
+@media(max-width: 400px){
+  
+  .card-btn {
+    font-size: 16px;
+    padding: 1.5%;
+    font-weight: 600;
+  }
+   .card-section {
+     width: 100%;
+    margin: auto;
+    flex-direction: column;
+    padding: 10px 10px;
+    height: 600px;
+  }
+
+  .card {
+    padding:auto 0;
+    width: 100%;
+    height: 40%;
+  }
+  .needHelp {
+    margin-top: 20px;
+  }
+
+
+}
+
+/* about us section styling  */
+
+.about-us {
+  background-color: rgb(255, 255, 255);
+  padding: 20px;
+  margin:0 auto auto auto;
+}
+
+.aheading {
+  text-align: center;
+  font-size: 2.5rem;
+  font-family: Arial;
+  font-weight: 800;
+  color: #f86b0d;
+}
+.content {
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: 400;
+  border-radius: 14px;
+  box-shadow: 0px 8px 1px rgb(211, 192, 174), 0 5px 20px rgb(192, 172, 134);
+}
+/*extra styling classes of  our work  */
+.dis {
+  display: flex;
+  flex-wrap: wrap;
+}
+.main-carousel {
+  background-color: #fafafa;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-top: 10%;
+}
+.cell {
+  width: 70%;
+  height: 180px;
+  /* margin-right: 10px; */
+
+  border-radius: 5px;
+  counter-increment: carousel-cell;
+}
+.cell:before {
+  display: flex;
+  align-items: center;
+  padding-right: 3rem;
+
+  color: white;
+}
+.main-carousel .cell img {
+  width: 90%;
+  height: 100%;
+}
+
+
+
+/* about us section styling  */
+
+/*extra styling classes of  our work  */
+
+
+@media(max-width: 400px){
+  .textp{
+    font-size: 15px;
+  }
+  .col5{
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 20px;
+  }
+  .content{
+    padding: 15px;
+  }
+  .about-us {
+    padding: 16px 0;
+  }
+}
+
+/* text-area */
+textarea {
+  padding: 3%;
+  border-color: #909090;
+  border-width: thick;
+}
