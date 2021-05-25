@@ -13,7 +13,7 @@
         </li>
         {% if this_User_num != admin_number %}
           <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
+            <a class="nav-link" href="/#aboutus">About Us</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/#contus">Contact Us</a>
@@ -33,11 +33,11 @@
         {% endif %} 
         {% if this_User_num == admin_number %}
         <li class="nav-item">
-          <a class="nav-link" href="/pending_raised_issue">Pending Issue</a>
+          <a class="nav-link" href="/pending_raised_issue">Pending Issues</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/solved_raised_issue">Solved Issue</a>
+          <a class="nav-link" href="/solved_raised_issue">Solved Issues</a>
         </li>
 
         <li class="nav-item">
@@ -52,7 +52,7 @@
           <a class="nav-link" href=""><i class="fas fa-user"></i> {{this_User}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+          <a class="nav-link" href="/logout" style="color:#f2f2f2"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </li>
 
         {% else %}

@@ -11,18 +11,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/4e16efa13b.js" crossorigin="anonymous"></script>
-    <link  rel="shortcut icon" type="image/x-icon" href="/images/devdoot-logo.png">
-    <link href="images/devdoot-logo.png" rel="apple-touch-icon">
+    <link  rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename='/images/devdoot-logo.png')}}">
+    <link href="{{url_for('static', filename='/images/devdoot-logo.png')}}" rel="apple-touch-icon">
     <link rel="stylesheet" href="https://unpkg.com/flickity@2.2.2/dist/flickity.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <title>Devdoot Foundation</title>
 </head>
 <body>
-          
 
+  <div class="navbar-sticky mobile-only text-right py-2 px-4">
+    <a class="menu-hamburger-mobile" data-toggle="collapse" href="#collapsibleNavbar" role="button" aria-expanded="false" aria-controls="collapsibleNavbar">
+      <i class="fas fa-navicon"> </i>
+    </a>
+  </div>
+          
+          {% include 'includes/nav.html' %}
             
             <div class="container">
-              {% include 'includes/_messages.html' %}
                 {% block body %}{% endblock %}
             </div>
 
@@ -32,7 +37,7 @@
           <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J" crossorigin="anonymous"></script>
           <script src="https://unpkg.com/flickity@2.2.2/dist/flickity.pkgd.min.js"></script>
-          <script src="main.js"></script>
+          <script src="{{ url_for('static', filename='main.js') }}"></script>
           <script>      
          
            
@@ -72,10 +77,12 @@ formInputs.forEach(formInput => {
   })
   
 })
-
+$('.navbar-sticky').addClass('visible');
 
 
           </script>
+
+
 
           
       </body>

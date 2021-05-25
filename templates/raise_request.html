@@ -10,7 +10,7 @@
   <div class="ovf">
     <div class="wrapper">
       <div class="title">
-        Raise Isuue
+        Raise Issue
       </div>
       <div class="form">
         <div class="inputfield">
@@ -25,22 +25,20 @@
             <label>Issue </label>
             <textarea type="text" class="input" name="issue" rows="8" maxlength="500" required></textarea>
             
-        </div> 
+          </div> 
 
             <div class="inputfield">
               
               <label>City </label>
               <input type="text" class="input" name="city" maxlength="100" required>
               
-          </div> 
+            </div> 
 
-          <div class="inputfield terms">
-            <label class="check">
-              <input type="checkbox"  id="priv" onclick="isagree()">
-              <span class="checkmark"></span>
-            </label>
-            <p>I have read and agree to the privacy policy</p>
-          </div> 
+            <div class="inputfield">
+              <label>Pin-Code </label>
+              <input type="text" class="input" name="pin" maxlength="20" value="000000">
+            </div>
+
 
         <div class="inputfield">
           <input id="submit_btn" type="submit" value="Raise" class="btn">
@@ -51,17 +49,6 @@
 
 </form>
 
-<script>
-  document.getElementById("submit_btn").disabled = true;
-  const isagree = () =>{
-    console.log("hiiii")
-    if(document.getElementById("priv").checked){
-      document.getElementById("submit_btn").disabled = false;
-    }else{
-      document.getElementById("submit_btn").disabled = true;
-    }
-  }
-</script>
 
 
 

@@ -134,6 +134,8 @@ body {
 
 .footers {
   background-color: #eeeeee;
+  margin-top: 2rem;
+  padding-bottom: 10px;
 }
 .footers h5 {
   color: #f86b0d;
@@ -469,19 +471,19 @@ and also iPads specifically.
     content: 'S/N';
   }
   .tab #vollistadmin td:nth-of-type(2):before {
-    content: 'NAME';
+    content: 'Name';
   }
   .tab #vollistadmin td:nth-of-type(4):before {
-    content: 'PROFESSION';
+    content: 'Profession';
   }
   .tab #vollistadmin td:nth-of-type(3):before {
-    content: 'CITY';
+    content: 'City';
   }
   .tab #vollistadmin td:nth-of-type(6):before {
-    content: 'VIEW';
+    content: 'View';
   }
   .tab #vollistadmin td:nth-of-type(5):before {
-    content: 'MOB. No';
+    content: 'Mob. No';
   }
 
   /* label for normal user */
@@ -489,13 +491,13 @@ and also iPads specifically.
     content: 'S/N';
   }
   .tab #vollistuser td:nth-of-type(2):before {
-    content: 'NAME';
+    content: 'Name';
   }
   .tab #vollistuser td:nth-of-type(4):before {
-    content: 'PROFESSION';
+    content: 'Profession';
   }
   .tab #vollistuser td:nth-of-type(3):before {
-    content: 'CITY';
+    content: 'City';
   }
 
 

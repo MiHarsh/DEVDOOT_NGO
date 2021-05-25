@@ -232,7 +232,12 @@ def signup():
         return redirect(url_for("signup"))
 
     else:
-        return render_template("signup.html" ,form = form)
+        this_User=""
+        this_User_num=""
+        if 'logged_in' in session: 
+            this_User =session['username']
+            this_User_num=session['mob_num']
+        return render_template("signup.html" ,form = form , this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
 
 ################################################################  Verify OTP
@@ -279,8 +284,12 @@ def verifyOTP():
 
         flash('otp was expired, please resend OTP', 'danger')
         return redirect(url_for("verifyOTP"))
-    
-    return render_template("verify.html")
+    this_User=""
+    this_User_num=""
+    if 'logged_in' in session: 
+        this_User =session['username']
+        this_User_num=session['mob_num']
+    return render_template("verify.html" , this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
 ################################################################  Resend OTP
 
@@ -347,7 +356,12 @@ def login():
             return redirect(url_for('index'))
 
     else:
-        return render_template("login.html" ,form = form)
+        this_User=""
+        this_User_num=""
+        if 'logged_in' in session: 
+            this_User =session['username']
+            this_User_num=session['mob_num']
+        return render_template("login.html" ,form = form , this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
 
 ################################################################  Forgot - Enter Mob
@@ -396,7 +410,12 @@ def forgot():
             return redirect(url_for("forgot"))
 
     else:
-        return render_template("forgot_mob.html" ,form = form)
+        this_User=""
+        this_User_num=""
+        if 'logged_in' in session: 
+            this_User =session['username']
+            this_User_num=session['mob_num']
+        return render_template("forgot_mob.html" ,form = form , this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
 
 ################################################################  Forgot - Enter OTP
@@ -423,9 +442,13 @@ def forgot_verify_otp():
                     return redirect(url_for("forgot"))
 
         flash('otp was expired, please resend OTP', 'danger')
-        return redirect(url_for("forgot_verify_otp"))
-    
-    return render_template("forgot_verify_otp.html")
+        return redirect(url_for("forgot_verify_otp")) 
+    this_User=""
+    this_User_num=""
+    if 'logged_in' in session: 
+        this_User =session['username']
+        this_User_num=session['mob_num']
+    return render_template("forgot_verify_otp.html" , this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
 
 
@@ -447,8 +470,12 @@ def update_password():
 
         flash('you have successfully changed password and can log in', 'success')
         return redirect(url_for("login"))
-    
-    return render_template("forgot_change_pass.html",form = form)
+    this_User=""
+    this_User_num=""
+    if 'logged_in' in session: 
+        this_User =session['username']
+        this_User_num=session['mob_num']
+    return render_template("forgot_change_pass.html",form = form , this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
 
 
@@ -463,6 +490,7 @@ def become_volunteer():
         mob_num = session['mob_num']
         email = f_data['email']
         city = f_data['city']
+        pin = f_data['pin']
         Profession = f_data['Profession']
 
         Volunteers = db.child("Volunteers").get().val()
@@ -490,6 +518,7 @@ def become_volunteer():
             "email": email,
             "city": city,
             "date":t_date,
+            "pin_code":pin,
             "Profession": Profession
         }
         print("hiii")
@@ -498,8 +527,12 @@ def become_volunteer():
         flash('you are now a Volunteers and can help other', 'success')
 
         return redirect(url_for("index"))
-
-    return render_template("be_vol.html")
+    this_User=""
+    this_User_num=""
+    if 'logged_in' in session: 
+        this_User =session['username']
+        this_User_num=session['mob_num']
+    return render_template("be_vol.html" , this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
 ################################################################################################# Rasing Request
 
@@ -515,13 +548,14 @@ def raise_request():
         today = datetime.datetime.now()
         t_date = today.strftime("%d") + "/" + today.strftime("%m") + "/" + today.strftime("%Y")
         p_time = today.strftime("%H") + ":" + today.strftime("%M") + ":" + today.strftime("%S")
-
+        pin = f_data['pin']
         data = {
             "city": city,
             "issue": issue,
             "issue_subject":issue_subject,
             "date": t_date,
             "status":0,
+            "pin_code":pin,
             "is_archive":0
         }
         admin_mail="div143har@gmail.com"
@@ -542,9 +576,19 @@ def raise_request():
             return redirect(url_for("index"))
         
         flash('Something went wrong', 'danger')
-        return render_template("raise_request.html")
+        this_User=""
+        this_User_num=""
+        if 'logged_in' in session: 
+            this_User =session['username']
+            this_User_num=session['mob_num']
+        return render_template("raise_request.html" , this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
-    return render_template("raise_request.html")
+    this_User=""
+    this_User_num=""
+    if 'logged_in' in session: 
+        this_User =session['username']
+        this_User_num=session['mob_num']
+    return render_template("raise_request.html" , this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
 
 ####################################################################################### My raised request
 
@@ -702,6 +746,12 @@ def archive_raised_request(id):
         })
     flash('successfully Archived', 'success')
     return redirect(url_for('my_raised_request'))
+
+###########################################################################Privacy page
+
+@app.route("/privacy")
+def privacy():
+    return render_template("privacy.html")
 
 #######################################################################################################
 

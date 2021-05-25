@@ -14,8 +14,8 @@
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.0.5/flickity.min.css" rel="stylesheet"/>
 
-    <link rel="shortcut icon" type="image/x-icon" href="/images/devdoot-logo.png" />
-    <link href="images/devdoot-logo.png" rel="apple-touch-icon" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{url_for('static', filename='/images/devdoot-logo.png')}}" />
+    <link href="{{url_for('static', filename='/images/devdoot-logo.png')}}" rel="apple-touch-icon" />
     <link rel="stylesheet" href="https://unpkg.com/flickity@2.2.2/dist/flickity.min.css"/>
     <title>Devdoot Foundation</title>
   </head>
@@ -82,24 +82,36 @@
           </div>
 
           <div class="col-xs-12 col-sm-12 col-md-7 footers-one">
-            <iframe class="googlemap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.2585204680618!2d80.91994811479583!3d26.831728583162512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfc35042a821f%3A0xbc004fbcc44c2106!2sLucknow%20Junction!5e0!3m2!1sen!2sin!4v1621257198521!5m2!1sen!2sin" width="600" height="250"style="border: 0" allowfullscreen="" loading="lazy"></iframe>
+            <iframe style="border: 3px solid #909090;" class="googlemap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3560.2585204680618!2d80.91994811479583!3d26.831728583162512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfc35042a821f%3A0xbc004fbcc44c2106!2sLucknow%20Junction!5e0!3m2!1sen!2sin!4v1621257198521!5m2!1sen!2sin" width="600" height="250"style="border: 0" allowfullscreen="" loading="lazy"></iframe>
           </div>
         </div>
       </div>
     </section>
 
     <!-- copyright section -->
+
+    <!--<section class="copyright border">
+      <div style="background: #fff8d9; width: 100vw;">
+        <div class="row text-center">
+          <div >
+            Developer || <span><a href="https://www.linkedin.com/in/swaraj30/" target="_blank">Swaraj Jain</a>, <a href="https://www.linkedin.com/in/harsh-mishra-5384b11a0/" target="_blank">Harsh Mishra</a> ,
+              <a href="https://www.linkedin.com/in/diwakar-raj-saket-4670301b1/" target="_blank">Diwakar Raj </a> , <a href="https://www.linkedin.com/in/divyanshu-singh-486772195/" target="_blank">Divyanshu Singh</a></span>
+          </div>
+        </div>
+      </div>
+    </section>-->
+
     <section class="copyright border">
       <div class="container">
         <div class="row text-center">
           <div class="col-md-12 pt-3">
-            <p class="text-muted">© 2021 Devdoot.org.</p>
+            <p class="text-muted">© 2021 Devdoot.org. <a href="/privacy" target="_blank">Privacy Policy</a></p>
           </div>
         </div>
       </div>
     </section>
     <!-- toggle to top button -->
-    <button onclick="topFunction()" id="myBtn" title="Go to top"><img src="up.png" /></button>
+    <button onclick="topFunction()" id="myBtn" style="background: none;" title="Go to top"><a href="#"><i style="background: orange; color: white; font-size: 1.5rem; border-radius: 50%; padding: 4px;" class="fas fa-arrow-up"></i></a></button>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js" integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"crossorigin="anonymous"></script>
@@ -111,6 +123,18 @@
       $('.dropdown-closer').click(event => {
         event.preventDefault();
       })
+
+      $(window).scroll(function(){
+            var height = $(window).scrollTop();
+            if (height > 200) {
+              $('#myBtn').fadeIn();
+            }else {
+              $('#myBtn').fadeOut();
+              }
+          });
+
+      
+      
     </script>
   </body>
 </html>

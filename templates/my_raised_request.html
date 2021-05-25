@@ -21,10 +21,11 @@
         </tr>
       </thead>
       <tbody id="volTable">
+        {% set val=namespace(value=0) %}
         {% for issue in issues %}
-          
+          {% set val.value=val.value+1 %}
           <tr id="my_issue">
-            <td>{{ loop.index }}</td>
+            <td>{{ val.value }}</td>
             <td>{{ issues[issue]['issue_subject'] }}</td>
             <td>{{ issues[issue]['date'] }}</td>
             <td>
@@ -87,21 +88,24 @@
   <script>
     let t_body = document.getElementById('volTable');
     let v_info=t_body.getElementsByTagName('tr');
+    var valuee=0;
     for (var i=0 ; i<v_info.length ; i++)
     {
       var t_ss=v_info[i].getElementsByTagName('td')[6];
       var t_arr=v_info[i].getElementsByTagName('td')[7];
       var t_ss2=(t_ss.textContent||t_ss.innerHTML);
       var is_archive=(t_arr.textContent||t_arr.innerHTML);
-      
+      valuee=valuee+1;
       if(is_archive==1)
       {
+        valuee=valuee-1;
         v_info[i].style.display="none";
       }
       if(t_ss2==1) 
       {
         v_info[i].style.backgroundColor="#90ee90";
       }
+      v_info[i].getElementsByTagName('td')[0].innerHTML=valuee;
       v_info[i].getElementsByTagName('td')[6].style.display = 'none'
       v_info[i].getElementsByTagName('td')[7].style.display = 'none'
     }

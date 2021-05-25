@@ -50,8 +50,16 @@
           <p>Show Password</p>
         </div>
 
+        <div class="inputfield terms">
+          <label class="check">
+            <input type="checkbox"  id="priv" onclick="isagree()">
+            <span class="checkmark"></span>
+          </label>
+          <p>I have read and agree to the <a href="/privacy">privacy policy</a></p>
+        </div> 
+
         <div class="inputfield">
-          <input type="submit" value="SignUp" class="btn">
+          <input type="submit" id="submit_btn" value="SignUp" class="btn">
         </div>
 
         <hr style="margin: 4px;">
@@ -80,7 +88,16 @@
 
 </script>
 
-
-
+<script>
+  document.getElementById("submit_btn").disabled = true;
+  const isagree = () =>{
+    console.log("hiiii")
+    if(document.getElementById("priv").checked){
+      document.getElementById("submit_btn").disabled = false;
+    }else{
+      document.getElementById("submit_btn").disabled = true;
+    }
+  }
+</script>
 
 {% endblock %}

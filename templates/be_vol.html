@@ -26,19 +26,17 @@
               <label>City </label>
               <input type="text" class="input" name="city" maxlength="60" required>
             </div> 
+
+            <div class="inputfield">
+              <label>Pin-Code </label>
+              <input type="text" class="input" name="pin" maxlength="20" value="000000">
+            </div>
     
             <div class="inputfield">
               <label>Profession </label>
               <input type="text" class="input" name="Profession" maxlength="80" required>
             </div> 
-            
-            <div class="inputfield terms">
-              <label class="check">
-                <input type="checkbox"  id="priv" onclick="isagree()">
-                <span class="checkmark"></span>
-              </label>
-              <p>I have read and agree to the privacy policy</p>
-            </div> 
+         
     
             <div class="inputfield">
               <input id="submit_btn" type="submit" value="Register" class="btn">
@@ -48,17 +46,6 @@
     </div>
 
   </form>
-
-  <script>
-    document.getElementById("submit_btn").disabled = true;
-    const isagree = () =>{
-      if(document.getElementById("priv").checked){
-        document.getElementById("submit_btn").disabled = false;
-      }else{
-        document.getElementById("submit_btn").disabled = true;
-      }
-    }
-  </script>
 
 
 {% endblock %}
