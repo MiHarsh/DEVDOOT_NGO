@@ -94,6 +94,9 @@ admin_number="8239335509"
 
 
 class signupForm(Form):
+    country_code = StringField('Country Code', [
+        validators.DataRequired(),
+        validators.Length(min=3, max=3)],default= '+91') 
     mob_num = StringField('Mobile Number', [
         validators.DataRequired(),
         validators.Length(min=10, max=10)
@@ -104,6 +107,7 @@ class signupForm(Form):
         validators.EqualTo('confirmed', message='Passwords do not match')
     ])
     confirmed = PasswordField('Confirm Password')
+    
 
 
 class loginForm(Form):
@@ -183,6 +187,7 @@ def signup():
     form =signupForm(request.form)
     if request.method == 'POST'and form.validate():
         mob_num = form.mob_num.data
+        country_code = form.country_code.data
 
         users = db.child("Users").get().val()
         for x in users:
@@ -200,6 +205,7 @@ def signup():
         p_time = today.strftime("%H") + ":" + today.strftime("%M") + ":" + today.strftime("%S")
 
         data = {
+            "country_code": country_code,
             "name": name,
             "mob_num": mob_num,
             "password": password,
@@ -214,8 +220,8 @@ def signup():
         number = data["mob_num"]
         session["mob_num"] = number
         session["is_login_signup"] = True  # To reuse the resend endpoint
-
-        status,otp_temp,time_otp = getOTPApi(number)
+        session["country_code"] = country_code
+        status,otp_temp,time_otp = getOTPApi(country_code,number)
         session['current_otp']   = str(otp_temp)
         session['current_time']  = time_otp
 
@@ -231,11 +237,11 @@ def signup():
 
 ################################################################  Verify OTP
 
-def getOTPApi(number):
+def getOTPApi(country_code,number):
     session['wrong_otp_count'] = 0 # to give attempts
 
     otp_temp = randrange(100000,999999)
-    URL = f"http://2factor.in/API/V1/132183a5-bd1d-11eb-8089-0200cd936042/SMS/{number}/{otp_temp}" 
+    URL = f"http://2factor.in/API/V1/132183a5-bd1d-11eb-8089-0200cd936042/SMS/{country_code+number}/{otp_temp}" 
     r = requests.get(url = URL).json()
     
     t0 = time.time()
@@ -282,7 +288,8 @@ def verifyOTP():
 def resendOTP():
 
     number = session["mob_num"]
-    status,otp_temp,time_otp = getOTPApi(number)
+    country_code = session["country_code"]
+    status,otp_temp,time_otp = getOTPApi(country_code,number)
     session['current_otp']   = str(otp_temp)
     session['current_time']  = time_otp
 
@@ -330,6 +337,7 @@ def login():
             session['logged_in'] = True
             session['username'] = user['name']
             session['mob_num'] = user['mob_num']
+            session['country_code'] = user['country_code']
             session['user_id'] = user_id
             session['is_admin']  = False
             if mob_num == admin_number:
@@ -373,11 +381,11 @@ def forgot():
             session['username'] = user['name']
             session['mob_num'] = user['mob_num']
             session['user_id'] = user_id
-
+            session['country_code'] = user['country_code']
             flash('Welcome ' + user['name'] + '!', 'success')
             print(session)
-
-            status,otp_temp,time_otp = getOTPApi(mob_num)
+            country_code = session['country_code']
+            status,otp_temp,time_otp = getOTPApi(country_code,mob_num)
             session['current_otp']   = str(otp_temp)
             session['current_time']  = time_otp
 
