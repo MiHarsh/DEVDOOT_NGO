@@ -3,16 +3,55 @@
 {% block body %}
 
 
-<div class="container" style="background-color:white; padding: 2%; margin-top: 1%; margin-bottom: 2%;">
-         
-  <br>
-    <a href="/become_volunteer"><button>Become Volunteer</button></a>
-    <a href="/raise_request"><button>Raise Request</button></a>
-    <div class="pagecontain">
+  <section class="card-section ">
+    <div class="card-section">
+
+      <div class="card">
+        <img src="{{url_for('static', filename='/images/NH.jpg')}}" />
+
+       <button class="card-btn btn"><a href="/raise_request" style="color: whitesmoke; text-decoration: none;">Request</a></button>
+
       </div>
 
-  </div>
+      <div class="card needHelp">
+        <img src="{{url_for('static', filename='/images/volunteer.jpg')}}" />
+        <button class="card-btn btn"><a href="/become_volunteer" style="color: whitesmoke; text-decoration: none;">Join Us</a></button>
+      </div>
+    </div>
+  </section>
+ <!-- about us section -->
+  <section class="about-us" id="aboutus">
+    <div>
+      <div class="content">
+        <div class="aheading"><p>About Us</p></div>
+        <p class="textp">
+          In the midst of an ongoing pandemic, with the government lockdown order, we started an initiative to reach our near ones. We as a team are witnessing the severity of the ongoing pandemic and trying our best to facilitate the required services during this time. Vanar Sena is actively volunteering and helping the needy to provide the services at their level best. At present, the Vanar Sena is active in more than 10 districts of Uttar Pradesh. They are able to reach people in other states like Delhi, Maharashtra, Uttarakhand, Madhya Pradesh, Orissa, Gujarat and provide assistance to the people as much as possible from their end. Vanar sena has taken it as a challenge to save people from unavoidable circumstances by working as a link between the government and the beneficiaries. We as a team had extended our hand to make it possible to provide supplies raised and needed by people across the nation.
+        Vanaar Sena is playing an important role in solving certain issues at the source within their capabilities, serving the society, and keeping humanity and hope alive.
+        </p>
+      </div>
+    </div>
+  </section>
 
+  <!-- our work section -->
+  <section class="about-us" id="our_work">
+    <div>
+      <div class="content dis">
+        <div class="col-md-7">
+          <div class="aheading"><p>Our Work</p></div>
+          <p class="textp">
+            More than 2000 requests were received by the people across the nation. With generous contributions from the community and through invaluable volunteers, we supplied more than 200 Remendisiver, around 630  oxygen concentrators to vulnerable areas,350 Ventilator beds, and 260 Plasma donations.  As an extension of our Covid 19 relief work, we are working in the field of food distribution to the needy and marginalized populations. We are trying to reach the doorsteps of the people who need certain resources to survive the pandemic. Not all issues reach directly to the government. 
+          </p>
+        </div>
+        <div class="col-md-5 col5 carousel slide">
+          <div class="main-carousel" data-flickity>
+            <div class="cell"><img src="{{url_for('static', filename='/images/work1.jpeg')}}" /></div>
+            <div class="cell"><img src="{{url_for('static', filename='/images/work2.jpeg')}}" /></div>
+            <div class="cell"><img src="{{url_for('static', filename='/images/work3.jpeg')}}" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {% endblock %}
 
