@@ -11,12 +11,14 @@
         <li class="nav-item">
           <a class="nav-link" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/#contus">Contact Us</a>
-        </li>
+        {% if this_User_num != admin_number %}
+          <li class="nav-item">
+            <a class="nav-link" href="#">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#contus">Contact Us</a>
+          </li>
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="/volunteer_list">Volunteers</a>
         </li>
@@ -28,7 +30,8 @@
         <li class="nav-item">
           <a class="nav-link" href="/my_raised_request">My Issue</a>
         </li>
-        {% endif %} {% if this_User_num == admin_number %}
+        {% endif %} 
+        {% if this_User_num == admin_number %}
         <li class="nav-item">
           <a class="nav-link" href="/pending_raised_issue">Pending Issue</a>
         </li>
@@ -46,19 +49,19 @@
         {% if this_User %}
 
         <li class="nav-item">
-          <a class="nav-link" href="">{{this_User}}</a>
+          <a class="nav-link" href=""><i class="fas fa-user"></i> {{this_User}}</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout">Logout</a>
+          <a class="nav-link" href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </li>
 
         {% else %}
 
         <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Sign up</a>
+          <a class="nav-link" href="/signup"><i class="fas fa-user-plus"></i> Signup</a>
         </li>
 
         {% endif %}

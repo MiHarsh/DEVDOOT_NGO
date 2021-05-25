@@ -498,7 +498,8 @@ def raise_request():
             "issue": issue,
             "issue_subject":issue_subject,
             "date": t_date,
-            "status":0
+            "status":0,
+            "is_archive":0
         }
         admin_mail="div143har@gmail.com"
         msg = Message(str(issue_subject) + " - " + str(city), sender='div143har@gmail.com', recipients=[admin_mail])
@@ -665,6 +666,19 @@ def blogs():
         this_User =session['username']
         this_User_num=session['mob_num']
     return render_template("blogs.html", this_User=this_User , blogs=blogs , this_User_num=this_User_num ,admin_number=admin_number)
+
+
+###################################################################################Archive my raised issue
+
+
+@app.route("/archive_raised_request" + "/<id>", methods=['POST'])
+@is_logged_in
+def archive_raised_request(id):
+    db.child("Users/" + session['user_id']+"/raised_requests/"+id).update({
+            'is_archive':1
+        })
+    flash('successfully Archived', 'success')
+    return redirect(url_for('my_raised_request'))
 
 #######################################################################################################
 

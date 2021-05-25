@@ -17,6 +17,7 @@
           <th>Date</th>
           <th>Issue</th>
           <th>Status</th>
+          <th>Archive</th>
         </tr>
       </thead>
       <tbody id="volTable">
@@ -63,7 +64,15 @@
               {% endif %}
             </td>
           
+
+            <td>
+              <form action="/archive_raised_request/{{ issue }}" method="POST" enctype="multipart/form-data">
+              <button class="btn btn-danger">Archive</button>
+            </form>
+            </td>
+
             <td>{{ issues[issue]['status'] }}</td>
+            <td>{{ issues[issue]['is_archive'] }}</td>
           </tr>
         {% endfor %}
       </tbody>
@@ -78,17 +87,23 @@
   <script>
     let t_body = document.getElementById('volTable');
     let v_info=t_body.getElementsByTagName('tr');
-    console.log(v_info.length)
     for (var i=0 ; i<v_info.length ; i++)
     {
-      var t_ss=v_info[i].getElementsByTagName('td')[5];
+      var t_ss=v_info[i].getElementsByTagName('td')[6];
+      var t_arr=v_info[i].getElementsByTagName('td')[7];
       var t_ss2=(t_ss.textContent||t_ss.innerHTML);
-      console.log(t_ss2);
+      var is_archive=(t_arr.textContent||t_arr.innerHTML);
+      
+      if(is_archive==1)
+      {
+        v_info[i].style.display="none";
+      }
       if(t_ss2==1) 
       {
         v_info[i].style.backgroundColor="#90ee90";
       }
-      v_info[i].getElementsByTagName('td')[5].style.display = 'none'
+      v_info[i].getElementsByTagName('td')[6].style.display = 'none'
+      v_info[i].getElementsByTagName('td')[7].style.display = 'none'
     }
   </script>
 
