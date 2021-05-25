@@ -216,7 +216,7 @@ def signup():
         session["is_login_signup"] = True  # To reuse the resend endpoint
 
         status,otp_temp,time_otp = getOTPApi(number)
-        session['current_otp']   = otp_temp
+        session['current_otp']   = str(otp_temp)
         session['current_time']  = time_otp
 
         if status:
@@ -251,7 +251,7 @@ def verifyOTP():
         t1 = time.time()
 
         if((t1 - session.get('current_time')) < 150):
-            if( session.get('current_otp') == int(r_otp)):
+            if( session.get('current_otp') == r_otp):
                 data = session.get("verify_user_details")
                 db.child("Users").push(data)
                 session["current_time"] = -1
@@ -273,7 +273,7 @@ def resendOTP():
 
     number = session["mob_num"]
     status,otp_temp,time_otp = getOTPApi(number)
-    session['current_otp']   = otp_temp
+    session['current_otp']   = str(otp_temp)
     session['current_time']  = time_otp
 
     if status:
@@ -368,7 +368,7 @@ def forgot():
             print(session)
 
             status,otp_temp,time_otp = getOTPApi(mob_num)
-            session['current_otp']   = otp_temp
+            session['current_otp']   = str(otp_temp)
             session['current_time']  = time_otp
 
             if status:
@@ -387,11 +387,10 @@ def forgot():
 def forgot_verify_otp():
     if request.method == 'POST':
         r_otp = request.form["forgot_otp"]
-
         t1 = time.time()
 
         if((t1 - session.get('current_time')) < 150):
-            if( session.get('current_otp') == int(r_otp)):
+            if( session.get('current_otp') == r_otp):
                 session["current_time"] = -1
                 flash('You can now enter your new password', 'success')
                 return redirect(url_for("update_password"))
