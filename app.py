@@ -232,9 +232,12 @@ def signup():
 ################################################################  Verify OTP
 
 def getOTPApi(number):
+    session['wrong_otp_count'] = 0 # to give attempts
+
     otp_temp = randrange(100000,999999)
-    URL = f"http://2factor.in/API/V1/3a17f455-b7ae-11eb-8089-0200cd936042/SMS/{number}/{otp_temp}" 
-    r = requests.get(url = URL).json() 
+    URL = f"http://2factor.in/API/V1/132183a5-bd1d-11eb-8089-0200cd936042/SMS/{number}/{otp_temp}" 
+    r = requests.get(url = URL).json()
+    
     t0 = time.time()
     if r["Status"] == "Success":
         return (True,otp_temp,t0)
@@ -249,6 +252,7 @@ def verifyOTP():
 
         r_otp = request.form['otp']
         t1 = time.time()
+        wrong_otp_count = session['wrong_otp_count']
 
         if((t1 - session.get('current_time')) < 150):
             if( session.get('current_otp') == r_otp):
@@ -258,8 +262,14 @@ def verifyOTP():
                 flash('you are now registered and can log in', 'success')
                 return redirect(url_for("login"))
             else:
-                flash('wrong otp', 'danger')
-                return render_template("verify.html")
+                wrong_otp_count+=1
+                session['wrong_otp_count'] = wrong_otp_count #update in session too
+                if wrong_otp_count < 3:
+                    flash(f'wrong otp, you have { 3 - wrong_otp_count } chances left !!', 'danger')
+                    return redirect(url_for("verifyOTP"))
+                else:
+                    flash(f'You have exhausted your chances,try again !!', 'danger')
+                    return redirect(url_for("signup"))
 
         flash('otp was expired, please resend OTP', 'danger')
         return redirect(url_for("verifyOTP"))
@@ -388,15 +398,21 @@ def forgot_verify_otp():
     if request.method == 'POST':
         r_otp = request.form["forgot_otp"]
         t1 = time.time()
-
+        wrong_otp_count = session['wrong_otp_count']
         if((t1 - session.get('current_time')) < 150):
             if( session.get('current_otp') == r_otp):
                 session["current_time"] = -1
                 flash('You can now enter your new password', 'success')
                 return redirect(url_for("update_password"))
             else:
-                flash('wrong otp', 'danger')
-                return redirect(url_for("forgot"))
+                wrong_otp_count+=1
+                session['wrong_otp_count'] = wrong_otp_count #update in session too
+                if wrong_otp_count < 3:
+                    flash(f'wrong otp, you have { 3 - wrong_otp_count } chances left !!', 'danger')
+                    return redirect(url_for("forgot_verify_otp"))
+                else:
+                    flash(f'You have exhausted your chances !!', 'danger')
+                    return redirect(url_for("forgot"))
 
         flash('otp was expired, please resend OTP', 'danger')
         return redirect(url_for("forgot_verify_otp"))
