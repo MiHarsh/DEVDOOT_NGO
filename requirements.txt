@@ -1,0 +1,6 @@
+Flask
+facebook-sdk
+tweepy
+WTForms
+Flask-Mail
+Pyrebase
