@@ -11,6 +11,7 @@ import hashlib
 import json
 
 from facebook import GraphAPI
+from threading import Thread
 import tweepy
 
 ##import os
@@ -76,10 +77,10 @@ def post_tweet(message):
 ################################################################
 
 app = Flask(__name__)
+admin_number="8239335509"
 
+############################################### SEND MAIL IN BACKGROUND THREAD
 
-
-mail = Mail(app)
 app.config["MAIL_SERVER"] = 'smtp.gmail.com'
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USERNAME"] = "div143har@gmail.com"
@@ -87,10 +88,18 @@ app.config['MAIL_PASSWORD'] = 'Div@143@Har'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
-admin_number="8239335509"
 
 
+def send_async_email(app,msg):
+    with app.app_context():
+        mail.send(msg)
 
+def send_email(msg):
+       thr = Thread(target=send_async_email,args=[app,msg])
+       thr.start()
+       return thr
+
+###############################################
 
 
 class signupForm(Form):
@@ -561,7 +570,7 @@ def raise_request():
         admin_mail="div143har@gmail.com"
         msg = Message(str(issue_subject) + " - " + str(city), sender='div143har@gmail.com', recipients=[admin_mail])
         msg.body = str(issue +'\r\n \r\n'+"By :- "+str(session['username'])+" \r\n ("+str(session['mob_num'])+")\r\n City :- "+str(city) )
-        mail.send(msg)
+        send_email(msg) # send mail in background thread
 
 
         message = f"Subject : {issue_subject}\n\n Issue : {issue}\n\n City : {city}\n Contact : {session['mob_num']}"
