@@ -385,7 +385,7 @@ a:status {
   text-align: center !important;
 }
 .tab td {
-  height: 28px;
+  min-height: 28px;
   text-align: center !important;
 }
 .tab td,
@@ -428,7 +428,7 @@ and also iPads specifically.
     border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 40%;
-    height: 45px;
+    min-height: 45px;
   }
 
   .tab td:before {
@@ -483,7 +483,7 @@ and also iPads specifically.
     content: 'View';
   }
   .tab #vollistadmin td:nth-of-type(5):before {
-    content: 'Mob. No';
+    content: 'Mob Number';
   }
 
   /* label for normal user */
@@ -531,7 +531,7 @@ and also iPads specifically.
     content: 'City';
   }
   .tab #sol_pen_issue td:nth-of-type(4):before {
-    content: 'Mobile Number	';
+    content: 'Mob Number';
   }
   .tab #sol_pen_issue td:nth-of-type(5):before {
     content: 'Date';

@@ -28,7 +28,7 @@
       <th>S/N</th>
       <th scope="col">Name</th>
       <th>City</th>
-      <th>Mobile Number</th>
+      <th>Mob Number</th>
       <th>Date</th>
       <th>Issue Subject</th>
       <th>Issue</th>
@@ -48,7 +48,7 @@
             <td>{{ users[user]['raised_requests'][request]['date'] }}</td>
             <td>{{ users[user]['raised_requests'][request]['issue_subject'] }}</td>
             <td>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ loop.index }}">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal{{ loop.index }}">
                   View
                 </button>
                 
@@ -66,7 +66,7 @@
                         {{ users[user]['raised_requests'][request]['issue'] }}
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                       </div>
                     </div>
                   </div>
