@@ -57,7 +57,7 @@ def post_fb(message):
     '''
     There can be multiple groups(pages where we can send)
     '''
-    groups = ['101415295474775']
+    groups = ['105244575107030']
 
     try: 
         for group in groups:
