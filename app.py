@@ -21,14 +21,14 @@ import tweepy
 
 
 config = {
-    "apiKey": "AIzaSyDYIcnYja88Q85jSzWezTKlSWAfhJWnJs8",
-    "authDomain": "devdoot-c612a.firebaseapp.com",
-    "databaseURL": "https://devdoot-c612a-default-rtdb.firebaseio.com",
-    "projectId": "devdoot-c612a",
-    "storageBucket": "devdoot-c612a.appspot.com",
-    "messagingSenderId": "479627305477",
-    "appId": "1:479627305477:web:58f7d13d77aa09e049726c",
-    "measurementId": "G-SCR49DP51V"
+    "apiKey": "AIzaSyBQPcxyndFZlCJhIsFHNhD5xqnq1LAv4dY",
+    "authDomain": "devdootsenango.firebaseapp.com",
+    "databaseURL": "https://devdootsenango-default-rtdb.firebaseio.com",
+    "projectId": "devdootsenango",
+    "storageBucket": "devdootsenango.appspot.com",
+    "messagingSenderId": "837374974168",
+    "appId": "1:837374974168:web:91b40a5b8df7faea4adfad",
+    "measurementId": "G-RKEXPG0BK4"
   }
 
 firebase = pyrebase.initialize_app(config)
@@ -77,14 +77,14 @@ def post_tweet(message):
 ################################################################
 
 app = Flask(__name__)
-admin_number="8239335509"
+admin_number=credentials['admin_number']['admin_number']
 
 ############################################### SEND MAIL IN BACKGROUND THREAD
 
 app.config["MAIL_SERVER"] = 'smtp.gmail.com'
 app.config["MAIL_PORT"] = 465
-app.config["MAIL_USERNAME"] = "div143har@gmail.com"
-app.config['MAIL_PASSWORD'] = 'Div@143@Har'
+app.config["MAIL_USERNAME"] = credentials['admin_mail']['admin_mail']
+app.config['MAIL_PASSWORD'] = credentials['admin_password']['admin_password']
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
@@ -203,6 +203,7 @@ def signup():
             if users[x]['mob_num'] == mob_num:
                 flash("An account with this number already exists", "danger")
                 return redirect(url_for('signup'))
+        
         
         
 
@@ -508,7 +509,7 @@ def become_volunteer():
             if Volunteers[x]['mob_num'] == mob_num:
                 flash('Volunteers with this Number allready exist', 'danger')
                 return redirect(url_for("index"))
-
+        
         '''mob_per = "0"
         email_per = "0"
  
@@ -567,8 +568,8 @@ def raise_request():
             "pin_code":pin,
             "is_archive":0
         }
-        admin_mail="div143har@gmail.com"
-        msg = Message(str(issue_subject) + " - " + str(city), sender='div143har@gmail.com', recipients=[admin_mail])
+        admin_mail="devdootsena@gmail.com"
+        msg = Message(str(issue_subject) + " - " + str(city), sender="devdootsena@gmail.com", recipients=[admin_mail])
         msg.body = str(issue +'\r\n \r\n'+"By :- "+str(session['username'])+" \r\n ("+str(session['mob_num'])+")\r\n City :- "+str(city) )
         send_email(msg) # send mail in background thread
 
