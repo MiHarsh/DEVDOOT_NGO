@@ -29,7 +29,7 @@
             <td>{{ issues[issue]['issue_subject'] }}</td>
             <td>{{ issues[issue]['date'] }}</td>
             <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal{{ loop.index }}">
+              <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal{{ loop.index }}">
                 View
               </button>
               
@@ -47,7 +47,7 @@
                       {{ issues[issue]['issue'] }}
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
                     </div>
                   </div>
                 </div>
@@ -56,11 +56,11 @@
             <td>
               {% if issues[issue]['status'] %}
               <form action="" method="" enctype="multipart/form-data">
-                <button class="btn btn-danger">Solved</button>
+                <button class="btn btn-danger btn-sm">Solved</button>
               </form>
               {% else %}
                 <form action="/delete_raised_request/{{ issue }}" method="POST" enctype="multipart/form-data">
-                  <button class="btn btn-danger">Unsolved </button>
+                  <button class="btn btn-danger btn-sm">Unsolved </button>
                 </form>
               {% endif %}
             </td>
@@ -68,7 +68,7 @@
 
             <td>
               <form action="/archive_raised_request/{{ issue }}" method="POST" enctype="multipart/form-data">
-              <button class="btn btn-danger">Archive</button>
+              <button class="btn btn-danger btn-sm">Archive</button>
             </form>
             </td>
 
