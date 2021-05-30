@@ -19,7 +19,7 @@ body {
   display: none;
   position: fixed;
   bottom: 20px;
-  right: 30px;
+  right: 0px;
   z-index: 99;
   border: none;
   outline: none;
@@ -563,7 +563,7 @@ and also iPads specifically.
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   background-color: #eee;
+   background-color: #fff;
    padding: 0 20px;
    padding-bottom: 6px;
 

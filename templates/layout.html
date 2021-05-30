@@ -51,7 +51,11 @@
     
     {% include 'includes/nav.html' %}
     <div >
-      {% include 'includes/_messages.html' %} {% block body %}{% endblock %}
+      <div class="container" style="z-index: 100;">
+        {% include 'includes/_messages.html' %}
+      </div>
+       {% block body %}
+       {% endblock %}
     </div>
 
     <!-- contact us /footer section-->

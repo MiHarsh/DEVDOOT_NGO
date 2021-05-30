@@ -20,28 +20,20 @@ import tweepy
 ##import cv2
 
 
-config = {
-    "apiKey": "AIzaSyBQPcxyndFZlCJhIsFHNhD5xqnq1LAv4dY",
-    "authDomain": "devdootsenango.firebaseapp.com",
-    "databaseURL": "https://devdootsenango-default-rtdb.firebaseio.com",
-    "projectId": "devdootsenango",
-    "storageBucket": "devdootsenango.appspot.com",
-    "messagingSenderId": "837374974168",
-    "appId": "1:837374974168:web:91b40a5b8df7faea4adfad",
-    "measurementId": "G-RKEXPG0BK4"
-  }
-
-firebase = pyrebase.initialize_app(config)
-db = firebase.database() 
-
-################################################################  Send Tweet and FB Post
-
 def read_creds(filename):
     with open(filename) as f:
         credentials = json.load(f)
     return credentials
  
 credentials = read_creds('credentials.json')
+
+
+config = credentials['firebase_config']
+
+firebase = pyrebase.initialize_app(config)
+db = firebase.database() 
+
+################################################################  Send Tweet and FB Post
 
 graph = GraphAPI(access_token=credentials['fb']['access_token'])
 
