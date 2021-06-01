@@ -39,7 +39,7 @@
 
         <div class="buttons">
 
-          <a type="button" class="blog-post_cta" id="blog_body{{loop.index}}" onclick="toggleread.call(this)">Read more</a> 
+          <a type="button" class="blog-post_cta" id="blog_body{{loop.index}}" onclick="toggleread.call(this)">Read More</a> 
           {% if this_User_num == admin_number %}
             <form action="/delete_blog/{{ blog }}" method="POST" enctype="multipart/form-data">
               <button  type="submit" class="delete">Delete</button>
@@ -59,6 +59,15 @@
 
   function toggleread() {
     var id = this.id;
+    var bt = document.getElementById(id);
+    
+    if(bt.innerText==="Read More"){
+      bt.innerText = "Read Less";
+    }
+    else{
+      bt.innerText = "Read More";
+    }
+    
     id+='s';
     console.log(id);
     document.getElementById(id).classList.toggle('post_body')
